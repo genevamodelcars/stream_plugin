@@ -23,6 +23,10 @@ Application.ResumeTableCanvas = (function (self)
 	 */
 	self.fadeIn = function (duration)
 	{
+		_resumeTable.alpha = 1;
+		_frame.stage.update ();
+
+		/*
 		createjs.Tween	.get				(_resumeTable, { loop:false, override:true })
 						.to					({ alpha:1.0 }, duration, createjs.Ease.getPowInOut(2))
 						.call				(function ()
@@ -33,10 +37,15 @@ Application.ResumeTableCanvas = (function (self)
 												_frame.stage.update ();
 											})
 						;
+		*/
 	};
 
 	self.fadeOut = function (duration)
 	{
+		_resumeTable.alpha = 0;
+		_frame.stage.update ();
+
+		/*
 		createjs.Tween	.get				(_resumeTable, { loop:false, override:true })
 						.to					({ alpha:0.0 }, duration, createjs.Ease.getPowInOut(2))
 						.call				(function ()
@@ -47,6 +56,7 @@ Application.ResumeTableCanvas = (function (self)
 												_frame.stage.update ();
 											})
 						;
+		*/
 	};
 
 	/**

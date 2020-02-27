@@ -37,6 +37,7 @@ ch.gemc.myresults.results.resumeTableClasses.TableCell.POS = function (a, b, c, 
 		this.label.x			= Math.round (this.label.x);
 		this.label.y			= Math.round (this.label.y);
 
+		/*
 		this.label.animate	({
 							from		:true,
 							props		:{alpha:0, scale:10},
@@ -44,6 +45,7 @@ ch.gemc.myresults.results.resumeTableClasses.TableCell.POS = function (a, b, c, 
 							ease		:'quadOut',
 							wait		:Math.random () * 500,
 							})
+		*/
 	}
 
 
@@ -55,7 +57,8 @@ ch.gemc.myresults.results.resumeTableClasses.TableCell.POS = function (a, b, c, 
 	this.label	= new zim.Label ({
 								text				:"Cell",
 								size				:110,
-								font				:"Helvetica Neue",
+//								font				:"Helvetica Neue",
+								font				:"Roboto",
 								fontOptions			:"bold",
 //								color				:zim.red,
 								color				:'red',

@@ -44,6 +44,12 @@ ch.gemc.myresults.results.ResumeTable = function (width, height, color, borderCo
 
 	this._clearRows = function ()
 	{
+		for (var i=0; i<this.rowsList.length; i++)
+		{
+			var row				= this.rowsList [i];
+				row.removeFrom	(this);
+		}
+
 		this.rowsList = [];
 		this._data = null;
 	}

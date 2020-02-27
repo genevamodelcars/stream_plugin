@@ -41,6 +41,7 @@
 			<div class='smalltable'>
 				<div id='smalltable'></div>
 			</div>
+			<div id='debugDiv'>debug</div>
 			</div>
 			<div class='gemclogo'>
 				<div id='timeleft' class='timeleft'></div>
@@ -54,11 +55,16 @@
 			// setup, the resume table.. (canvas)
 			Application.ResumeTableCanvas.setTargetId ('resumeTableDiv');
 			
+			var messageCount = 0;
+
 			var socket				= new WebSocket ('ws://192.168.1.129:8787');
 				socket.onmessage	= function (event)
 									{
 										var data = JSON.parse (event.data);
 
+										// DEBUG: count message..
+										document.getElementById ('debugDiv').innerHTML = ++messageCount;
+										
 										// event name..
 										document.getElementById("eventname").innerHTML = data.EVENT.METADATA.GROUP;
 

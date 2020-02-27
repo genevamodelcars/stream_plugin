@@ -38,6 +38,7 @@ ch.gemc.myresults.results.resumeTableClasses.TableCell.DRIVER = function (a, b, 
 		this.label.x			= Math.round (this.label.x);
 		this.label.y			= Math.round (this.label.y);
 
+		/*
 		this.label.animate	({
 							from		:true,
 						//	props		:{alpha:0, scale:10},
@@ -46,6 +47,7 @@ ch.gemc.myresults.results.resumeTableClasses.TableCell.DRIVER = function (a, b, 
 							ease		:'quadInOut',
 							wait		:Math.random () * 500,
 							})
+		*/
 }
 
 
@@ -57,8 +59,10 @@ ch.gemc.myresults.results.resumeTableClasses.TableCell.DRIVER = function (a, b, 
 	
 	this.label	= new zim.Label ({
 								text				:"Cell",
-								size				:24,
-								font				:"Helvetica Neue",
+//								size				:24,
+								size				:34,
+//								font				:"Helvetica Neue",
+								font				:"Roboto",
 								fontOptions			:"bold",
 								color				:zim.white,
 								rollColor			:zim.red,
