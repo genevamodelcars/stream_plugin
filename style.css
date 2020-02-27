@@ -2,121 +2,193 @@ body {
    margin: 0;
 }
 
-table {
-    width: 100%;
-	border: 0;
-	font-family: 'Open Sans', sans-serif;
-	font-size: 13px;
-}
-
-th {
-    height: 30px;
-	text-transform: uppercase;
-	background-color: #3AB54A;
-}
-
-tr {
-    height: 32px;
-    text-align: center;
-}
-
 .window {
 	width:	1280px;
 	height: 720px;
-	/*background-color: gray; /* ATTENTION DEV ONLY  */
-}
-
-.resumetable {
-	width:	600px;
-	height: 400px;
+	background-color: gray; /* ATTENTION DEV ONLY  */
+    background-image: url('assets/background-dev.png');
     position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-	margin-top: auto;
-    margin-bottom: auto;
-    left: 0;
-    right: 0;
-	top: 0;
-	bottom: 0;
-}
-.resume {
-	background: white;
+    font-family: 'Lato';
+	overflow: hidden;
 }
 
-.smalltable {
-	width:	1280px;
-	background:  rgba(0, 0, 0, 0.9);
-	color: white;
-}
-
-.small {
-	font-family: Tahoma, Verdana, Segoe, sans-serif;
-    font-size: 12px;
-	letter-spacing: -0.2px;
-    font-style: normal;
-	width: 0;
-	padding: 10px;
-	/*font-weight: 600;*/
-}
-
-.small tr{
-	height: 60px;
-    vertical-align: top;
-}
-
-.small td{
-	width: 122px;
-}
-
-.gemclogo {
-    bottom: 0;
-    /* right: 20px; */
+.event {
+    position: absolute;
+    font-weight: 700;
     color: white;
-    position: absolute;
-    font-family: Tahoma, Verdana, Segoe, sans-serif;
-    font-size: 20px;
-    font-style: normal;
-    padding: 20px;
-    width: 1240px;
-    text-align: right;
-    /* height: 80px; */
-    /* margin: 20px; */
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #0E76BD;
+    padding:20px;
 }
-	
+
 .eventname {
-	display: inline;
+    font-size: 42px;
+    margin-bottom: 10px;
+    font-family: tahoma;
 }
 
-.timeleft {
-	display: inline;
+.categoryname {
+    font-size: 22px;
+}
+
+.live {
     position: absolute;
-    left: 20px;
-	font-weight: 600;
+    top: 10px;
+    right: 10px;
+    width: 150px;
+    color: white;
+    background-color: rgba(0,0,0,0.8);
+    padding: 10px;
 }
 
-.pos {
-	display: inline;
-	background: red;
-  border-radius: 5px;
-  -moz-border-radius: 5x;
-  -webkit-border-radius: 5px;
-  color: white;
-  display: inline-block;
-  margin-right: 3px;
-  text-align: center;
-  width: 1.6em; 
-  padding: 3px;
+.live.out {
+	-webkit-transition: 3s;
+	-moz-transition: 3s;
+	-ms-transition: 3s;
+	-o-transition: 3s;
+	transition: 3s;
+	right: -200px !important;
 }
 
-.countdowntimer {
+.round-time {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.live-table {
+  width: 100%; 
+}
+
+.resume {
+    position: absolute;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto;
+    margin-top: 200px;
+    width: 600px;
+    color: white;
+    background-color: rgba(0,0,0,0.8);
+    padding: 20px;
+}
+
+.resume.out {
+	-webkit-transition: 3s;
+	-moz-transition: 3s;
+	-ms-transition: 3s;
+	-o-transition: 3s;
+	transition: 3s;
+	left: -2000px !important;
+}
+
+.resume-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px
+}
+
+.resume-table {
+    width: 100%;
+}
+
+.resume-table th {
+    text-align: left    ;
+}
+
+.inactive {
+    color: grey;
+}
+
+.next {
 	position: absolute;
-    bottom: 100px;
-    left: 60px;
-    font-size: 100px;
-    text-transform: uppercase;
-    font-weight: 800;
-    font-family: Tahoma, Verdana, Segoe, sans-serif;
-	color: gray;
+    bottom: 10px;
+    left: 10px;
+    font-size: 22px;
+    font-weight: 700;
+    color: white;
+    background-color: rgba(0,0,0,0.8);
+    padding: 10px;
 }
+
+.next.out {
+	-webkit-transition: 3s;
+	-moz-transition: 3s;
+	-ms-transition: 3s;
+	-o-transition: 3s;
+	transition: 3s;
+	left: -700px !important;
+}
+
+.series-logo {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    height: 150px;
+}
+
+.series-logo img {
+    height: 100%;
+}
+
+.driver-color { 
+    height: 25px;
+    width: 25px;
+    border-radius: 0%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    margin-right: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    color: black;
+    background-color:white;
+}
+
+.color-0 {
+    background-color:teal;
+}
+
+.color-1 {
+    background-color: lawngreen;    
+}
+
+.color-2 {
+    background-color: orange;
+}
+
+.color-3 {
+    background-color: aqua;
+}
+
+.color-4 {
+    background-color: rebeccapurple;
+}
+
+.color-5 {
+    background-color: fuchsia;
+}
+
+.color-6 {
+    background-color: orchid;
+}
+
+.color-7 {
+    background-color: darkred;
+}
+
+.color-8 {
+    background-color: salmon;
+}
+
+.color-9 {
+    background-color: palegreen;
+}
+
+.color-10 {
+    background-color: cornflowerblue;
+}
+
+.color-11 {
+   background-color: royalblue; 
 }

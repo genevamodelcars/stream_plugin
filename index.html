@@ -1,84 +1,167 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <title>gemc stream xsplit plugin</title>
-        <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>gemc stream xsplit plugin</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 </head>
 
 <script src="js/xjs.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <body>
+    <div class='window'>
+        <div class ='event'>
+            <div id="eventname" class="eventname">
+                EVENT NAME
+            </div>
+            <div id="categoryname" class="categoryname">
+                CATEGORY NAME
+            </div>
+        </div>
+        <div class ='live' id ='live'>
+        </div>
+        <div class ='resume' id ='resume'>
+        </div>
+		<div class ='next' id ='next'>
+        </div>
+        <div class ='series-logo'>
+            <img src="assets/gemcseries.png">
+        </div>
+    </div>
+    
+    <script>
+        /*var socket = new WebSocket('ws://192.168.1.129:8787');*/
 
-<div class='window'>
-	<div class='smalltable'>
-		<div id="smalltable"></div>
-	</div>
-	<div class='resumetable' id='resumetable'>
-	</div>
-	<div class='gemclogo'><div id="timeleft" class="timeleft"> </div><div id="eventname" class="eventname"></div> - <b>geneva</b>modelcars</div>
-	<span id="countdowntimer" class="countdowntimer"></span>
-</div>
+        /*socket.onmessage=function(event) {*/
+        /*"var data = JSON.parse(event.data);*/
+        var data = JSON.parse('{"EVENT":{"VERSION":"1.0","KEY":"B18D6AD1E6626F596700","TIMESTAMP":"881117","CONFIG":{"MODE":"LapAndTime","NROFBESTLAPS":0},"METADATA":{"NAME":"gemcseries 2020 : Round 1","SECTION":"TC  [TouringCar]","GROUP":"TouringCar :: Qualification :: Série 1 - Manche 1","RACETIME":"00:05:00","CURRENTTIME":"00:00:42","REMAININGTIME":"00:04:48","COUNTDOWN":"00:00:00","DIVERGENCE":"00:00:00"},"DATA":[{"COLOR":1,"INDEX":1,"VEHICLE":2,"PILOTNUMBER":0,"TRANSPONDER":"8869803","PILOT":"Dominique Vögtli","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"","TREND":0,"LAPS":2,"LAPTIME":"23.058","ABSOLUTTIME":"00:43.058","BESTTIME":"23.058","BESTTIMEN":"0.000","MEDIUMTIME":"23.058","FORECAST":"14 05:22.812","PROGRESS":47,"DELAYTIMEFIRST":"0.000","DELAYTIMEPREVIOUS":"0.000","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"5.9 V","TEMPERATUR":"41 °C","SPEED":"0.00"},{"COLOR":0,"INDEX":2,"VEHICLE":1,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Bastien De Marco","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"","TREND":0,"LAPS":2,"LAPTIME":"25.000","ABSOLUTTIME":"00:45.000","BESTTIME":"25.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"},{"COLOR":2,"INDEX":3,"VEHICLE":3,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Jean Paul Michel","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"","TREND":0,"LAPS":1,"LAPTIME":"27.000","ABSOLUTTIME":"00:27.000","BESTTIME":"27.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"},{"COLOR":3,"INDEX":4,"VEHICLE":3,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Jean Paul Michel","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"","TREND":0,"LAPS":1,"LAPTIME":"28.000","ABSOLUTTIME":"00:27.000","BESTTIME":"27.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"},{"COLOR":4,"INDEX":5,"VEHICLE":3,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Jean Paul Michel","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"","TREND":0,"LAPS":1,"LAPTIME":"29.000","ABSOLUTTIME":"00:29.000","BESTTIME":"27.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"},{"COLOR":5,"INDEX":6,"VEHICLE":3,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Jean Paul Michel","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"!","TREND":0,"LAPS":1,"LAPTIME":"31.000","ABSOLUTTIME":"00:31.000","BESTTIME":"27.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"},{"COLOR":6,"INDEX":7,"VEHICLE":3,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Jean Paul Michel","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"!","TREND":0,"LAPS":1,"LAPTIME":"33.000","ABSOLUTTIME":"00:33.000","BESTTIME":"27.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"},{"COLOR":7,"INDEX":8,"VEHICLE":3,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Jean Paul Michel","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"!","TREND":0,"LAPS":1,"LAPTIME":"36.000","ABSOLUTTIME":"00:36.000","BESTTIME":"27.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"},{"COLOR":8,"INDEX":9,"VEHICLE":3,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Jean Paul Michel","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"!","TREND":0,"LAPS":0,"LAPTIME":"40.000","ABSOLUTTIME":"00:40.000","BESTTIME":"27.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"},{"COLOR":9,"INDEX":10,"VEHICLE":3,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Jean Paul Michel","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"!","TREND":0,"LAPS":0,"LAPTIME":"47.000","ABSOLUTTIME":"00:47.000","BESTTIME":"27.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"}]}}');
 
-<script>
-    var socket = new WebSocket('ws://192.168.1.129:8787');
-
-	socket.onmessage=function(event) { 
-		var data = JSON.parse(event.data);
-		document.getElementById("eventname").innerHTML = data.EVENT.METADATA.GROUP;
-		var htmlresumetable = "<table class='resume'><tr><th>Pos</th><th>Driver</th><th>Laps</th><th>Time</th><th>Bestlap</th><th>Average</th></tr>";
-		var htmlsmalltable = "<table class ='small'><tr>";
-			
-		for (i = 0; i < data.EVENT.DATA.length; i++) {
-			htmlresumetable += "<tr><td>" + data.EVENT.DATA[i].INDEX + "</td><td><b>" + data.EVENT.DATA[i].PILOT + "</b></td><td>" + data.EVENT.DATA[i].LAPS + "</td><td>" + data.EVENT.DATA[i].ABSOLUTTIME + "</td><td>" + data.EVENT.DATA[i].BESTTIME + "</td><td>" + data.EVENT.DATA[i].MEDIUMTIME + "</td></tr>";
-			htmlsmalltable += "<td><div class='pos'>P" +  data.EVENT.DATA[i].INDEX + "</div></br><b>" + data.EVENT.DATA[i].PILOT + "</b></br>L" + data.EVENT.DATA[i].LAPS + ": " + data.EVENT.DATA[i].ABSOLUTTIME + "</br>L:" + data.EVENT.DATA[i].LAPTIME + " B:" + data.EVENT.DATA[i].BESTTIME + "</td>"
-		}
-		htmlresumetable += "</table>";
-		htmlsmalltable += "</tr></table>";
+        document.getElementById("eventname").innerHTML = data.EVENT.METADATA.NAME;
+        document.getElementById("categoryname").innerHTML = data.EVENT.METADATA.GROUP.split("::")[1] + " " + data.EVENT.METADATA.GROUP.split("::")[0] +" | " + data.EVENT.METADATA.GROUP.split("::")[2];
+        
+        var htmlresumetable = "<div class='resume-title'>" + data.EVENT.METADATA.GROUP.split("::")[1] + " " + data.EVENT.METADATA.GROUP.split("::")[0] +"| " + data.EVENT.METADATA.GROUP.split("::")[2] + "</div><table class='resume-table'><tr><th>Pos</th><th>Driver</th><th>Laps</th><th>Time</th><th>Bestlap</th><th>Average</th></tr>";
+        var htmllivetable = "<div class = 'round-time'>" + data.EVENT.METADATA.REMAININGTIME + "</div><table class ='live-table'>";
+        var htmlnext = "Prochaine manche dans : " + data.EVENT.METADATA.DIVERGENCE;
 		
-		document.getElementById("resumetable").innerHTML = htmlresumetable;
-		document.getElementById("smalltable").innerHTML = htmlsmalltable;
+        var index = 0;
+        var difflap = 0;
+        var difftime = 0;
+        var maxdrivers = 12;
+        
+        if (data.EVENT.DATA.length > maxdrivers) {
+            index = maxdrivers;
+        } else {
+            index = data.EVENT.DATA.length;
+        }
+
+        for (i = 0; i < index; i++) {
+            htmlresumetable += "<tr><td>" + data.EVENT.DATA[i].INDEX + "</td><td>" + "<span class = 'driver-color color-" + data.EVENT.DATA[i].COLOR +  "'>" + data.EVENT.DATA[i].VEHICLE + "</span> " + data.EVENT.DATA[i].PILOT + "</td><td>" + data.EVENT.DATA[i].LAPS + "</td><td>" + data.EVENT.DATA[i].ABSOLUTTIME + "</td><td>" + data.EVENT.DATA[i].BESTTIME + "</td><td>" + data.EVENT.DATA[i].MEDIUMTIME + "</td></tr>";
+            
+            if (data.EVENT.DATA[i].LAPINFO == "!") {
+                htmllivetable += "<tr class='live-table-position inactive'>";
+            } else {
+                htmllivetable += "<tr class='live-table-position active'>";
+            }
+            
+            htmllivetable += "<td><span class = 'driver-color color-" + data.EVENT.DATA[i].COLOR +  "'>" + data.EVENT.DATA[i].VEHICLE + "</span></td><td>" + data.EVENT.DATA[i].PILOT.split(/\s/).reduce((response,word)=> response+=word.slice(0,1),'') + "</td>";
+            
+            if (i < 1) {
+                htmllivetable += "<td>" + data.EVENT.DATA[i].LAPS; 
+                
+                if (data.EVENT.DATA[i].LAPS > 1) {
+                            htmllivetable += " Laps</td>";
+                        } else {
+                            htmllivetable += " Lap</td>";
+                        }
+                
+            } else {
+                difflap = parseInt(data.EVENT.DATA[i-1].LAPS - data.EVENT.DATA[i].LAPS);
+                
+                if (difflap > 0){
+                       htmllivetable += "<td>+" + difflap;
+                        if (difflap > 1) {
+                            htmllivetable += " Laps</td>";
+                        } else {
+                            htmllivetable += " Lap</td>";
+                        }
+                } else {
+                    difftime = parseFloat(data.EVENT.DATA[i].ABSOLUTTIME.split(":")[1]) - parseFloat(data.EVENT.DATA[i-1].ABSOLUTTIME.split(":")[1]);
+                    htmllivetable += "<td>+" + difftime.toFixed(3) + "<td>";
+                }
+            }
+            htmllivetable += "</tr>";
+        }
+        
+        
+        htmlresumetable += "</table>";
+        htmllivetable += "</table>";
+
+        document.getElementById("live").innerHTML = htmllivetable;
+        document.getElementById("resume").innerHTML = htmlresumetable;
+		document.getElementById("next").innerHTML = htmlnext;
 		
-		if (data.EVENT.METADATA.COUNTDOWN == "00:00:00"){
-			document.getElementById("timeleft").innerHTML = data.EVENT.METADATA.REMAININGTIME;
+		var timingstatus = 0;
+		/*
+			0 = waiting
+			1 = nextrace schedule
+			2 = race preparation
+			3 = race running
+			4 = race ended
+		*/
+		
+		const now = Date.now();
+		const waitime = 100000;
+		var endtime = 0;
+		
+		if (data.EVENT.METADATA.DIVERGENCE.split(":")[1] > 3) {
+			timingstatus = 1;
 		} else {
-			document.getElementById("timeleft").innerHTML = data.EVENT.METADATA.COUNTDOWN;
+			if (data.EVENT.METADATA.COUNTDOWN == "00:00:30" || data.EVENT.METADATA.REMAININGTIME != data.EVENT.METADATA.RACETIME)		{
+				timingstatus = 3;
+				if (data.EVENT.METADATA.CURRENTTIME == "00:00:01") {
+					const endtime = Date.now();
+				}
+				if (now < endtime + waitime) {
+					var timingstatus = 4;
+				}
+			} else if (data.EVENT.METADATA.REMAININGTIME == data.EVENT.METADATA.RACETIME) {
+					timingstatus = 2;
+			}				
 		}
 		
-		if (data.EVENT.METADATA.COUNTDOWN == "00:00:30") {
-		$("#resumetable").fadeOut(1000);
+		switch (timingstatus) {
+			case 0:
+				//waiting
+				document.getElementById("live").classList.add('out');
+				document.getElementById("resume").classList.add('out');
+				document.getElementById("next").classList.add('out');
+				break;
+			case 1:
+				//nextrace schedule
+				document.getElementById("live").classList.add('out');
+				document.getElementById("resume").classList.add('out');	
+				document.getElementById("next").classList.remove('out');
+				break;
+			case 2:
+				//race preparation
+				document.getElementById("live").classList.remove('out');
+				document.getElementById("resume").classList.add('out');
+				document.getElementById("next").classList.remove('out');				
+				break;
+			case 3:
+				//race running
+				document.getElementById("live").classList.remove('out');
+				document.getElementById("resume").classList.add('out');
+				document.getElementById("next").classList.add('out');
+				break;
+			case 4:
+				//race ended
+				document.getElementById("live").classList.add('out');
+				document.getElementById("resume").classList.remove('out');
+				document.getElementById("next").classList.add('out');
+				break;
 		}
-		
-		if (data.EVENT.METADATA.CURRENTTIME == data.EVENT.METADATA.RACETIME) {
-		$("#resumetable").fadeIn(1000);
-		}
-		
-		if (data.EVENT.METADATA.CURRENTTIME == "00:00:01") {
-		$("#resumetable").hide();
-		}
-		
-		if (data.EVENT.METADATA.COUNTDOWN == "00:00:11") {
-		    var timeleft = 11;
-			var downloadTimer = setInterval(function(){
-			timeleft--;
-			
-			if(timeleft < 1) {
-					if (timeleft == 0) {
-					$("#countdowntimer").fadeIn(250);
-					document.getElementById("countdowntimer").textContent = "Go!";
-					$("#countdowntimer").fadeOut(1000);
-					clearInterval(downloadTimer);
-					}
-			}
-			else {
-				$("#countdowntimer").fadeIn(0);
-				document.getElementById("countdowntimer").textContent = timeleft;
-				$("#countdowntimer").fadeOut(1000);
-			}
-			},1000);
-		}	
-	};
-</script>
-
+    </script>
 </body>
 </html>
