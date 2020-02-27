@@ -90,7 +90,8 @@ Application.ResumeTableCanvas = (function (self)
 //	var _resumeTableVisibleState;
 	var _target;
 	var _frame;
-	var _countDownText			= new createjs.Text ("", "300px fontLCD", "#ff0000");
+//	var _countDownText			= new createjs.Text ("", "300px fontLCD", "#ff0000");
+	var _countDownText			= new createjs.Text ("", "300px Arial", "#ff0000");
 		_countDownText.alpha	= 0.0;
 	
 	function _invalidate (flag)

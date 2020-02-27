@@ -46,7 +46,8 @@ ch.gemc.myresults.results.resumeTableClasses.TableCellHeader = function (a, b, c
 	this.label	= new zim.Label ({
 								text				:"Cell",
 								size				:14,
-								font				:"Helvetica Neue",
+//								font				:"Helvetica Neue",
+								font				:"Arial",
 								fontOptions			:"bold",
 								color				:zim.dark,
 								});
