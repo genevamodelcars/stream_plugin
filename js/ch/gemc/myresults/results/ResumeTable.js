@@ -42,10 +42,10 @@ ch.gemc.myresults.results.ResumeTable = function (width, height, color, borderCo
 							new ch.gemc.myresults.results.resumeTableClasses.ColumnConfig (200, "MEDIUMTIME", "AVERAGE",	ch.gemc.myresults.results.resumeTableClasses.TableCell,			ch.gemc.myresults.results.resumeTableClasses.TableCellHeader),
 							];
 
-	// TODO:
 	this._clearRows = function ()
 	{
-		// ..
+		this.rowsList = [];
+		this._data = null;
 	}
 	
 	this._buildRows = function ()

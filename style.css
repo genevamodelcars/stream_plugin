@@ -1,33 +1,18 @@
 
-
-
 #fxCanvas {
 	width: 100%;
 	height: 100%;
 	position: fixed;
-	/*
-	z-index: 0;
-	*/
 }
 
-/*
-#resumeTableCanvas {
-	width: 100%;
-	height: 100%;
-	position: fixed;
-}
-*/
 #resumeTableDiv {
 	width: 100%;
 	height: 100%;
 	position: fixed;
 }
 
-
-
 body {
 	margin: 0;
-	background: url("bg.png");
 }
 
 table {

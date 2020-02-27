@@ -10,17 +10,38 @@ Application.ResumeTableCanvas = (function (self)
 
 //	=== P U B L I C ========================================================================================
 
-	self.setCountDown = function (value)
+	self.showCountDown = function (value)
 	{
-		_countDownText.text	= value;
+		_countDownText.text		= value;
+		_countDownText.alpha	= 1.0;
 		_invalidate ('invalidateLayout');
 		_frame.stage.update ();
 	};
 
-	self.setAlpha = function (value)
+	/**
+	 * Duration in milli seconds
+	 */
+	self.fadeIn = function (duration)
 	{
 		createjs.Tween	.get				(_resumeTable, { loop:false, override:true })
-						.to					({ alpha:value }, 500, createjs.Ease.getPowInOut(2))
+						.to					({ alpha:1.0 }, duration, createjs.Ease.getPowInOut(2))
+						.call				(function ()
+											{
+											})
+						.addEventListener	('change', function ()
+											{
+												_frame.stage.update ();
+											})
+						;
+	};
+
+	self.fadeOut = function (duration)
+	{
+		createjs.Tween	.get				(_resumeTable, { loop:false, override:true })
+						.to					({ alpha:0.0 }, duration, createjs.Ease.getPowInOut(2))
+						.call				(function ()
+											{
+											})
 						.addEventListener	('change', function ()
 											{
 												_frame.stage.update ();
@@ -44,38 +65,33 @@ Application.ResumeTableCanvas = (function (self)
 		_init ();
 	};
 
-	/*
-	self.setVisible = function (state)
-	{
-		if (_resumeTableVisibleState == state)
-		return;
-
-		_resumeTableVisibleState = state;
-		_invalidate ('invalidateLayout');
-	};
-	*/
-
 	self.setData = function (data)
 	{
-		if (_resumeTableData == data)
+		/*
+		if (_resumeTableData && _resumeTableData.EVENT && _resumeTableData.EVENT.DATA)
+		if (isEqual (data.EVENT.DATA, _resumeTableData.EVENT.DATA))
 		return;
-		
+		*/
+
 		_resumeTableData = data;
 		_invalidate ('invalidateData');
-		_invalidate ('invalidateSize');
+	//	_invalidate ('invalidateSize');
 		_invalidate ('invalidateLayout');
+
 	};
 
 	
 //	=== P R I V A T E ======================================================================================
 	
-	var _resumeTable = new ch.gemc.myresults.results.ResumeTable ();
 //	var _resumeTable;
+	var _resumeTable		= new ch.gemc.myresults.results.ResumeTable ();
+		_resumeTable.alpha	= 0.0;
 	var _resumeTableData;
 //	var _resumeTableVisibleState;
 	var _target;
 	var _frame;
-	var _countDownText	= new createjs.Text ("", "300px fontLCD", "#ff0000");
+	var _countDownText			= new createjs.Text ("", "300px fontLCD", "#ff0000");
+		_countDownText.alpha	= 0.0;
 	
 	function _invalidate (flag)
 	{

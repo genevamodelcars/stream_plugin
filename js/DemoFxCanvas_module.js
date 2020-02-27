@@ -10,21 +10,36 @@ Application.DemoFxCanvas = (function (self)
 //	=== P U B L I C ========================================================================================
 
 	/**
-	 * Animate de alpha.
+	 * Duration in milli seconds
 	 */
-	self.setAlpha = function (value)
+	self.fadeIn = function (duration)
 	{
+		// activate tick..
 		createjs.Ticker.addEventListener ('tick', tickHandler);
 
-		createjs.Tween	.get	(stage, { loop:false, override:true })
-						.to		({ alpha:value }, 1000, createjs.Ease.getPowInOut(2))
-						.call	(function ()
-								{
-									if (stage.alpha <= 0.1)
-									{
-										createjs.Ticker.removeEventListener ('tick', tickHandler);
-									}
-								}, null, this)
+		createjs.Tween	.get				(stage, { loop:false, override:true })
+						.to					({ alpha:1.0 }, duration, createjs.Ease.getPowInOut(2))
+						.call				(function ()
+											{
+											})
+						.addEventListener	('change', function ()
+											{
+											})
+						;
+	};
+
+	self.fadeOut = function (duration)
+	{
+		createjs.Tween	.get				(stage, { loop:false, override:true })
+						.to					({ alpha:0.0 }, duration, createjs.Ease.getPowInOut(2))
+						.call				(function ()
+											{
+												// desactivate tick..
+												createjs.Ticker.removeEventListener ('tick', tickHandler);
+											})
+						.addEventListener	('change', function ()
+											{
+											})
 						;
 	};
 
