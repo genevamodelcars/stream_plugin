@@ -50,7 +50,6 @@
 			<span id='countdowntimer' class='countdowntimer'></span>
 		</div>
 		
-		<!-- Code -->
 		<script>
 
 			// setup, the fx canvas.. (particles)
@@ -59,27 +58,32 @@
 			// setup, the resume table.. (canvas)
 			Application.ResumeTableCanvas.setTargetId ('resumeTableDiv');
 			
-			var socket				= new WebSocket ('ws://192.168.1.129:8787');
-				socket.onmessage	= function (event)
+//			var socket				= new WebSocket ('ws://192.168.1.129:8787');
+//				socket.onmessage	= function (event)
+// simulation..
+			function socketOnMessage (event)
 									{
 										var data = JSON.parse (event.data);
 
+										// event name..
 										document.getElementById("eventname").innerHTML = data.EVENT.METADATA.GROUP;
+
+										// small table..
 										var htmlsmalltable = "<table class ='small'><tr>";
-										
 										for (i = 0; i < data.EVENT.DATA.length; i++) {
 											htmlsmalltable += "<td><div class='pos'>P" +  data.EVENT.DATA[i].INDEX + "</div></br><b>" + data.EVENT.DATA[i].PILOT + "</b></br>L" + data.EVENT.DATA[i].LAPS + ": " + data.EVENT.DATA[i].ABSOLUTTIME + "</br>L:" + data.EVENT.DATA[i].LAPTIME + " B:" + data.EVENT.DATA[i].BESTTIME + "</td>"
 										}
 										htmlsmalltable += "</tr></table>";
-										
 										document.getElementById("smalltable").innerHTML = htmlsmalltable;
 
+										// timeleft..
 										if (data.EVENT.METADATA.COUNTDOWN == "00:00:00"){
 											document.getElementById("timeleft").innerHTML = data.EVENT.METADATA.REMAININGTIME;
 										} else {
 											document.getElementById("timeleft").innerHTML = data.EVENT.METADATA.COUNTDOWN;
 										}
 										
+										// countdown..
 										if (data.EVENT.METADATA.COUNTDOWN == "00:00:30") {
 											Application.ResumeTableCanvas.fadeOut	(1000);
 											Application.DemoFxCanvas.fadeOut		(1000);

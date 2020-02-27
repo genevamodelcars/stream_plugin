@@ -1,4 +1,42 @@
 
+
+@font-face {
+	font-family:	'Roboto';
+	src:			url('./assets/fonts/Roboto-Light.woff2') format('woff2'),
+					url('./assets/fonts/Roboto-Light.woff') format('woff');
+	font-weight:	300;
+	font-style:		normal;
+}
+
+@font-face {
+	font-family:	'Roboto';
+	src:			url('./assets/fonts/Roboto-Medium.woff2') format('woff2'),
+					url('./assets/fonts/Roboto-Medium.woff') format('woff');
+	font-weight:	500;
+	font-style:		normal;
+}
+
+@font-face {
+	font-family:	'Cambay';
+	src:			url('./assets/fonts/Cambay-Bold.woff2') format('woff2'),
+					url('./assets/fonts/Cambay-Bold.woff') format('woff');
+	font-weight:	bold;
+	font-style:		normal;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #fxCanvas {
 	width: 100%;
 	height: 100%;

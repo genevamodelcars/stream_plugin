@@ -57,8 +57,10 @@ ch.gemc.myresults.results.resumeTableClasses.TableCell.DRIVER = function (a, b, 
 	
 	this.label	= new zim.Label ({
 								text				:"Cell",
-								size				:24,
-								font				:"Helvetica Neue",
+//								size				:24,
+								size				:34,
+//								font				:"Helvetica Neue",
+								font				:"Roboto",
 								fontOptions			:"bold",
 								color				:zim.white,
 								rollColor			:zim.red,
