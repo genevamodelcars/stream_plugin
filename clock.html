@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html>
-<body style="background-image: url('assets/background-dev.png'); /* DEV ONLY  */">
-
-<canvas id="clock" width="300" height="300">
+<head>
+    <title>gemc stream xsplit plugin 2020</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class='window'>
+        <div class ='series-logo'>
+            <canvas id="clock" width="100" height="100">
 </canvas>
+        </div>
 
-<img id="logo" width="200" height="200" src="assets/gemcseries.png" style="visibility:hidden;">
+
+<img id="logo" width="200" height="200" src="assets/clock.png" style="visibility:hidden;">
+
+<div>
 
 <script>
 var canvas = document.getElementById("clock");
@@ -16,18 +26,18 @@ radius = radius *0.95
 setInterval(drawClock, 1000);
 
 function drawClock() {
-ctx.clearRect(-150,-150,300,300);
+  ctx.clearRect(-150,-150,300,300);
+  ctx.globalAlpha = 0.5
   drawLogo(ctx, radius);
+  ctx.globalAlpha = 1
   drawFace(ctx, radius)
   drawNumbers(ctx, radius);
   drawTime(ctx, radius);
 }
 
 function drawLogo(ctx, radius) {
-var img = document.getElementById("logo");
-ctx.globalAlpha = 0.5
-ctx.drawImage(img, -150,-150);
-ctx.globalAlpha = 1
+  var img = document.getElementById("logo");
+  ctx.drawImage(img, -150,-150);
 };
 
 function drawFace(ctx, radius) {
