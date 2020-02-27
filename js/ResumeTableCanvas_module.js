@@ -4,12 +4,29 @@ window.	Application		= window.Application || {};
 
 // voir: https://zestedesavoir.com/tutoriels/358/module-pattern-en-javascript/
 
+
+
+
+
+
+
+
+
+
 Application.ResumeTableCanvas = (function (self)
 {
 
 
+// TODO:
+//		invalidation tick..
+
+
+
+
+
 //	=== P U B L I C ========================================================================================
 
+	/*
 	self.showCountDown = function (value)
 	{
 		_countDownText.text		= value;
@@ -17,36 +34,65 @@ Application.ResumeTableCanvas = (function (self)
 		_invalidate ('invalidateLayout');
 		_frame.stage.update ();
 	};
+	*/
 
 	/**
-	 * Duration in milli seconds
+	 * Duration in milli-seconds
 	 */
 	self.fadeIn = function (duration)
 	{
-		createjs.Tween	.get				(_resumeTable, { loop:false, override:true })
-						.to					({ alpha:1.0 }, duration, createjs.Ease.getPowInOut(2))
-						.call				(function ()
-											{
-											})
-						.addEventListener	('change', function ()
-											{
-												_frame.stage.update ();
-											})
-						;
+		// start anyway..
+		if (duration == 0)
+		{
+			// kill current tween.. (if exist)
+			createjs.Tween	.get				(_resumeTable, { loop:false, override:true })
+							.to					({ alpha:1.0 }, duration)
+							.call				(function complete ()
+												{
+													_frame.stage.update ();
+												})
+							;
+		}
+		// start only when state change..
+		else if (_resumeTableVisibleState != _STATE_FADE_IN)
+		{
+			createjs.Tween	.get				(_resumeTable, { loop:false, override:true })
+							.to					({ alpha:1.0 }, duration, createjs.Ease.getPowInOut (2))
+							.addEventListener	('change', function ()
+												{
+													_frame.stage.update ();
+												})
+							;
+		}
+		_resumeTableVisibleState	= _STATE_FADE_IN;
 	};
 
 	self.fadeOut = function (duration)
 	{
-		createjs.Tween	.get				(_resumeTable, { loop:false, override:true })
-						.to					({ alpha:0.0 }, duration, createjs.Ease.getPowInOut(2))
-						.call				(function ()
-											{
-											})
-						.addEventListener	('change', function ()
-											{
-												_frame.stage.update ();
-											})
-						;
+		// start anyway..
+		if (duration == 0)
+		{
+			// kill current tween.. (if exist)
+			createjs.Tween	.get				(_resumeTable, { loop:false, override:true })
+							.to					({ alpha:0.0 }, duration)
+							.call				(function complete ()
+												{
+													_frame.stage.update ();
+												})
+							;
+		}
+		// start only when state change..
+		else if (_resumeTableVisibleState != _STATE_FADE_OUT)
+		{
+			createjs.Tween	.get				(_resumeTable, { loop:false, override:true })
+							.to					({ alpha:0.0 }, duration, createjs.Ease.getPowInOut (2))
+							.addEventListener	('change', function ()
+												{
+													_frame.stage.update ();
+												})
+							;
+		}
+		_resumeTableVisibleState	= _STATE_FADE_OUT;
 	};
 
 	/**
@@ -67,6 +113,8 @@ Application.ResumeTableCanvas = (function (self)
 
 	self.setData = function (data)
 	{
+	//	console.log ("setData: " + data);
+
 		/*
 		if (_resumeTableData && _resumeTableData.EVENT && _resumeTableData.EVENT.DATA)
 		if (isEqual (data.EVENT.DATA, _resumeTableData.EVENT.DATA))
@@ -77,21 +125,24 @@ Application.ResumeTableCanvas = (function (self)
 		_invalidate ('invalidateData');
 	//	_invalidate ('invalidateSize');
 		_invalidate ('invalidateLayout');
-
 	};
 
 	
 //	=== P R I V A T E ======================================================================================
 	
-//	var _resumeTable;
-	var _resumeTable		= new ch.gemc.myresults.results.ResumeTable ();
-		_resumeTable.alpha	= 0.0;
+	var _resumeTable			= new ch.gemc.myresults.results.ResumeTable ();
+		_resumeTable.alpha		= 0.0;
 	var _resumeTableData;
-//	var _resumeTableVisibleState;
+	var _resumeTableVisibleState;
 	var _target;
 	var _frame;
 	var _countDownText			= new createjs.Text ("", "300px fontLCD", "#ff0000");
 		_countDownText.alpha	= 0.0;
+	
+
+// static ?..
+	const _STATE_FADE_OUT		= "stateFadeOut";
+	const _STATE_FADE_IN		= "stateFadeIn";
 	
 	function _invalidate (flag)
 	{
@@ -105,6 +156,8 @@ Application.ResumeTableCanvas = (function (self)
 			case 'invalidateSize':
 			case 'invalidateLayout':
 
+				// center..
+
 				if (_frame && _frame.stage)
 				_resumeTable.center (_frame.stage);
 				// prevent blurring..
@@ -117,7 +170,7 @@ Application.ResumeTableCanvas = (function (self)
 				_countDownText.x = Math.round (_countDownText.x);
 				_countDownText.y = Math.round (_countDownText.y);
 				
-			//	_frame.stage.update ();
+//				_frame.stage.update ();
 				break;
 		}
 	}
@@ -161,6 +214,11 @@ Application.ResumeTableCanvas = (function (self)
 		
 					},	scope=null, once=false);
 
+		_resumeTable.on	('resize', function ()
+					{
+						_invalidate ('invalidateSize');
+		
+					},	scope=null, once=false);
 	}
 
 
@@ -168,4 +226,22 @@ Application.ResumeTableCanvas = (function (self)
 //	=== E N D ==============================================================================================
 
     return self;
+
 }) (Application.ResumeTableCanvas || {});
+
+
+
+
+
+
+
+
+
+// static ?..
+
+//	=== S T A T I C ========================================================================================
+
+Application.ResumeTableCanvas.STATE_FADE_OUT	= "stateFadeOut";
+Application.ResumeTableCanvas.STATE_FADE_IN		= "stateFadeIn";
+
+

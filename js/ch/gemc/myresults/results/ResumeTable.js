@@ -18,21 +18,28 @@ ch.gemc.myresults.results.ResumeTable = function (width, height, color, borderCo
 	var duo;	if (duo = zob (ch.gemc.myresults.results.ResumeTable, arguments, null, this))	{return duo;}
 	
 	// params..
-//	color	= zim.clear;
+	color	= zim.clear;
 //	color	= zim.white;
-	color	= 'red';
-//	color	= zim.red;	// for debug
+//	color	= zim.red;
 
 	// constructor..
 	this.Rectangle_constructor (width, height, color, borderColor, borderWidth, corner, dashed, style, group, inherit);
 	
-	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+//	=== P U B L I C ========================================================================================
 	
-	this.name	= "the ResumeTable";
+	this.name		= "the ResumeTable";
 	
-	this._data;
-	this.rowsList = [];
-	this._colsListConfig	=
+	this.setData	= _setData;
+
+
+//	=== P R I V A T E ======================================================================================
+
+	let _this				= this;
+	let _data;
+	let _boundsHolder		= this.getBounds ();
+	let _rowsList			= [];
+	let _colsListConfig		=
 							[
 							new ch.gemc.myresults.results.resumeTableClasses.ColumnConfig (60, "INDEX", "POS",				ch.gemc.myresults.results.resumeTableClasses.TableCell.POS,		ch.gemc.myresults.results.resumeTableClasses.TableCellHeader),
 							new ch.gemc.myresults.results.resumeTableClasses.ColumnConfig (400, "PILOT", "DRIVER",			ch.gemc.myresults.results.resumeTableClasses.TableCell.DRIVER,	ch.gemc.myresults.results.resumeTableClasses.TableCellHeader),
@@ -42,55 +49,74 @@ ch.gemc.myresults.results.ResumeTable = function (width, height, color, borderCo
 							new ch.gemc.myresults.results.resumeTableClasses.ColumnConfig (200, "MEDIUMTIME", "AVERAGE",	ch.gemc.myresults.results.resumeTableClasses.TableCell,			ch.gemc.myresults.results.resumeTableClasses.TableCellHeader),
 							];
 
-	this._clearRows = function ()
+	
+	function _setData (data)
 	{
-		this.rowsList = [];
-		this._data = null;
+		_clearRows ();
+		_data = data;
+		_buildRows ();
+		_doLayout	();
+	}
+
+	function _clearRows ()
+	{
+		for (var i=0; i<_rowsList.length; i++)
+		{
+			var row				= _rowsList [i];
+				row.removeFrom	(this);
+		}
+
+		_rowsList = [];
+		_data = null;
 	}
 	
-	this._buildRows = function ()
+	function _buildRows ()
 	{
 		// header..
 		var row				= new ch.gemc.myresults.results.resumeTableClasses.TableRowHeader ();
-			row.setColumns	(this._colsListConfig, 40);
+			row.setColumns	(_colsListConfig, 40);
 			row.setData		(null);
-		this.rowsList.push (row);
+		_rowsList.push (row);
 		
 		// racers..
-		for (var i=0; i<this._data.EVENT.DATA.length; i++)
+		for (var i=0; i<_data.EVENT.DATA.length; i++)
 		{
 			var row				= new ch.gemc.myresults.results.resumeTableClasses.TableRow ();
-				row.setColumns	(this._colsListConfig, 60);
-				row.setData		(this._data.EVENT.DATA [i]);
-			this.rowsList.push (row);
+				row.setColumns	(_colsListConfig, 60);
+				row.setData		(_data.EVENT.DATA [i]);
+			_rowsList.push (row);
 		}
 	}
-	
-	this._doLayout = function ()
+
+	function _doLayout ()
 	{
 		var currentY = 0;
-		for (var i=0; i<this.rowsList.length; i++)
+		for (var i=0; i<_rowsList.length; i++)
 		{
-			var row			= this.rowsList [i];
-				row.addTo	(this);
+			var row			= _rowsList [i];
+				row.addTo	(_this);
 				row.pos		(0, currentY);
 				currentY	+= row.height + 2;
 		}
-		this.setBounds ();
+		_this.setBounds ();
+		
+		// is size changed..
+		var currentBounds = _this.getBounds ();
+		var isSizeChanged = currentBounds.height != _boundsHolder.height;
+		_boundsHolder = currentBounds;
 
 		// adjust the background..
-		this.shape.graphics.command.w = this.getBounds ().width;
-		this.shape.graphics.command.h = this.getBounds ().height;
+		_this.shape.graphics.command.w = currentBounds.width;
+		_this.shape.graphics.command.h = currentBounds.height;
+		
+		// dispatch resize..
+		if (isSizeChanged)
+		_this.dispatchEvent ('resize');
+
+		if (_this.stage)
+		_this.stage.update ();
 	}
 	
-	this.setData = function (data)
-	{
-		this._clearRows ();
-		this._data = data;
-		this._buildRows ();
-		this._doLayout	();
-	}
-
 }
 
 zim.extend (ch.gemc.myresults.results.ResumeTable, zim.Rectangle, null, "Rectangle");

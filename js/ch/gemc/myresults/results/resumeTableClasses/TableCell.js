@@ -38,6 +38,7 @@ ch.gemc.myresults.results.resumeTableClasses.TableCell = function (a, b, c, d, s
 		this.label.x		= Math.round (this.label.x);
 		this.label.y		= Math.round (this.label.y);
 
+		/*
 		this.label.animate	({
 							from		:true,
 							props		:{alpha:0},
@@ -46,6 +47,7 @@ ch.gemc.myresults.results.resumeTableClasses.TableCell = function (a, b, c, d, s
 							ease		:'quadOut',
 							wait		:1000 + Math.random () * 500,
 							})
+		*/
 	}
 
 
@@ -58,7 +60,8 @@ ch.gemc.myresults.results.resumeTableClasses.TableCell = function (a, b, c, d, s
 								text				:"Cell",
 								size				:34,
 //								font				:"Helvetica Neue",
-								font				:"fontLCD",
+//								font				:"fontLCD",
+								font				:"Roboto",
 							//	fontOptions			:"bold",
 								color				:zim.white,
 								rollColor			:zim.red,
