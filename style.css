@@ -9,8 +9,8 @@ body {
 .window {
 	width:	1280px;
 	height: 720px;
-	background-color: gray; /* ATTENTION DEV ONLY  */
-    background-image: url('assets/background-dev.png');
+	background-color: gray; /* DEV ONLY  */
+    background-image: url('assets/background-dev.png'); /* DEV ONLY  */
     position: absolute;
     font-family: 'Lato';
 	overflow: hidden;
@@ -32,10 +32,16 @@ body {
 
 .categoryname {
     font-size: 22px;
+	text-transform: uppercase;
 }
 
 .live {
     position: absolute;
+	-webkit-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-ms-transition: 0.5s;
+	-o-transition: 0.5;
+	transition: 0.5s;
     top: 10px;
     right: 10px;
     width: 150px;
@@ -45,11 +51,11 @@ body {
 }
 
 .live.out {
-	-webkit-transition: 3s;
-	-moz-transition: 3s;
-	-ms-transition: 3s;
-	-o-transition: 3s;
-	transition: 3s;
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	-ms-transition: 1s;
+	-o-transition: 1s;
+	transition: 1s;
 	right: -200px !important;
 }
 
@@ -64,7 +70,7 @@ body {
   width: 100%; 
 }
 
-.cell {
+.live-table-cell {
 	position: absolute;
 	-webkit-transition: 0.5s;
 	-moz-transition: 0.5s;
@@ -75,59 +81,13 @@ body {
     width: 150px;
 }
 
-.live-table-position0 {
-    top: 60px;
-}
-
-.live-table-position1 {
-    top: 90px;
-}
-
-.live-table-position2 {
-    top: 120px;
-}
-
-.live-table-position3 {
-    top: 150px;
-}
-
-.live-table-position4 {
-    top: 180px;
-}
-
-.live-table-position5 {
-    top: 210px;
-}
-
-.live-table-position6 {
-    top: 240px;
-}
-.live-table-position7 {
-    top: 270px;
-}
-
-.live-table-position8 {
-    top: 300px;
-}
-
-.live-table-position9 {
-    top: 330px;
-}
-
-.live-table-position10 {
-    top: 360px;
-}
-
-.live-table-position11 {
-    top: 390px;
-}
-
-.live-table-position12 {
-    top: 420px;
-}
-
 .resume {
     position: absolute;
+	-webkit-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-ms-transition: 0.5s;
+	-o-transition: 0.5;
+	transition: 0.5s;
     left: 0; 
     right: 0; 
     margin-left: auto; 
@@ -140,18 +100,20 @@ body {
 }
 
 .resume.out {
-	-webkit-transition: 3s;
-	-moz-transition: 3s;
-	-ms-transition: 3s;
-	-o-transition: 3s;
-	transition: 3s;
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	-ms-transition: 1s;
+	-o-transition: 1s;
+	transition: 1s;
 	left: -2000px !important;
 }
 
 .resume-title {
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 700;
-    margin-bottom: 10px
+    margin-bottom: 10px;
+	text-transform: uppercase;
+	text-align: center;
 }
 
 .resume-table {
@@ -168,21 +130,27 @@ body {
 
 .next {
 	position: absolute;
+	-webkit-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-ms-transition: 0.5s;
+	-o-transition: 0.5;
+	transition: 0.5s;
     bottom: 10px;
     left: 10px;
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 700;
+	text-transform: uppercase;
     color: white;
     background-color: rgba(0,0,0,0.8);
     padding: 10px;
 }
 
 .next.out {
-	-webkit-transition: 3s;
-	-moz-transition: 3s;
-	-ms-transition: 3s;
-	-o-transition: 3s;
-	transition: 3s;
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	-ms-transition: 1s;
+	-o-transition: 1s;
+	transition: 1s;
 	left: -700px !important;
 }
 
@@ -190,7 +158,7 @@ body {
     position: absolute;
     bottom: 20px;
     right: 20px;
-    height: 150px;
+    height: 100px;
 }
 
 .series-logo img {
@@ -213,52 +181,58 @@ body {
 
 .driver-name {
 	margin-right: 10px;
+	height: 100%;
+    vertical-align: middle;
 }
 
-.color-0 {
-    background-color:teal;
+.driver-delta {
+	height: 100%;
+    vertical-align: middle;
+	float:right;
+}
+
+.color-0 {  
+	/* Not used */
 }
 
 .color-1 {
-    background-color: lawngreen;    
+	/* Normal state */
 }
 
 .color-2 {
-    background-color: orange;
+	/* Locktime */
 }
 
 .color-3 {
-    background-color: aqua;
+	/* Not used */
 }
 
 .color-4 {
-    background-color: rebeccapurple;
+	/* Round finish */
+    background-color: aqua;
 }
 
 .color-5 {
-    background-color: fuchsia;
+	/* Miss */
+	background-color: grey;
 }
 
 .color-6 {
-    background-color: orchid;
+	/* Warmup */
+	background-color: yellow;
 }
 
 .color-7 {
-    background-color: darkred;
+	/* Offtime */
 }
 
 .color-8 {
-    background-color: salmon;
+	/* Lost */
+	background-color: grey;
+	
 }
 
 .color-9 {
-    background-color: palegreen;
-}
-
-.color-10 {
-    background-color: cornflowerblue;
-}
-
-.color-11 {
-   background-color: royalblue; 
+	/* Lastlap */
+	background-color: red;
 }

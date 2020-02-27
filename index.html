@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>gemc stream xsplit plugin</title>
+    <title>gemc stream xsplit plugin 2020</title>
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 </head>
@@ -13,28 +13,34 @@
     <div class='window'>
         <div class ='event'>
             <div id="eventname" class="eventname">
-                EVENT NAME
             </div>
             <div id="categoryname" class="categoryname">
-                CATEGORY NAME
             </div>
         </div>
         <div class ='live' id ='live'>
 			<div class = 'round-time' id = 'round-time'>
 			</div>
 			<div class ='live-table' id ='live-table'>
-				<div class = 'cell live-table-position1 hide' id = "1"></div>
-				<div class = 'cell live-table-position2 hide' id = "2"></div>
-				<div class = 'cell live-table-position3 hide' id = "3"></div>
-				<div class = 'cell live-table-position4 hide' id = "4"></div>
-				<div class = 'cell live-table-position5 hide' id = "5"></div>
-				<div class = 'cell live-table-position6 hide' id = "6"></div>
-				<div class = 'cell live-table-position7 hide' id = "7"></div>
-				<div class = 'cell live-table-position8 hide' id = "8"></div>
-				<div class = 'cell live-table-position9 hide' id = "9"></div>
-				<div class = 'cell live-table-position10 hide' id = "10"></div>
-				<div class = 'cell live-table-position11 hide' id = "11"></div>
-				<div class = 'cell live-table-position12 hide' id = "12"></div>
+				<div class = 'live-table-cell hide' id = "1"></div>
+				<div class = 'live-table-cell hide' id = "2"></div>
+				<div class = 'live-table-cell hide' id = "3"></div>
+				<div class = 'live-table-cell hide' id = "4"></div>
+				<div class = 'live-table-cell hide' id = "5"></div>
+				<div class = 'live-table-cell hide' id = "6"></div>
+				<div class = 'live-table-cell hide' id = "7"></div>
+				<div class = 'live-table-cell hide' id = "8"></div>
+				<div class = 'live-table-cell hide' id = "9"></div>
+				<div class = 'live-table-cell hide' id = "10"></div>
+				<div class = 'live-table-cell hide' id = "11"></div>
+				<div class = 'live-table-cell hide' id = "12"></div>
+				<div class = 'live-table-cell hide' id = "13"></div>
+				<div class = 'live-table-cell hide' id = "14"></div>
+				<div class = 'live-table-cell hide' id = "15"></div>
+				<div class = 'live-table-cell hide' id = "16"></div>
+				<div class = 'live-table-cell hide' id = "17"></div>
+				<div class = 'live-table-cell hide' id = "18"></div>
+				<div class = 'live-table-cell hide' id = "19"></div>
+				<div class = 'live-table-cell hide' id = "20"></div>
 			</div>
         </div>
         <div class ='resume' id ='resume'>
@@ -47,112 +53,119 @@
     </div>
     
     <script>
-        /*var socket = new WebSocket('ws://192.168.1.129:8787');*/
+		var waittime = 10000; // 10sec
+		var cellsize = 30; //px
+		var maxdrivers = 12;
+		var endtime = 9582744014867;
 		
-        /*socket.onmessage=function(event) {*/
-        /*"var data = JSON.parse(event.data);*/
+		//var socket = new WebSocket('ws://192.168.1.108:8787');
+        //socket.onmessage=function(event) {
+        //var data = JSON.parse(event.data);
 		
-        var data = JSON.parse('{"EVENT":{"VERSION":"1.0","KEY":"B18D6AD1E6626F596700","TIMESTAMP":"881117","CONFIG":{"MODE":"LapAndTime","NROFBESTLAPS":0},"METADATA":{"NAME":"gemcseries 2020 : Round 1","SECTION":"TC  [TouringCar]","GROUP":"TouringCar :: Qualification :: Série 1 - Manche 1","RACETIME":"00:05:00","CURRENTTIME":"00:00:42","REMAININGTIME":"00:04:48","COUNTDOWN":"00:00:00","DIVERGENCE":"00:00:00"},"DATA":[{"COLOR":1,"INDEX":1,"VEHICLE":2,"PILOTNUMBER":0,"TRANSPONDER":"8869803","PILOT":"Dominique Vögtli","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"","TREND":0,"LAPS":2,"LAPTIME":"23.058","ABSOLUTTIME":"00:43.058","BESTTIME":"23.058","BESTTIMEN":"0.000","MEDIUMTIME":"23.058","FORECAST":"14 05:22.812","PROGRESS":47,"DELAYTIMEFIRST":"0.000","DELAYTIMEPREVIOUS":"0.000","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"5.9 V","TEMPERATUR":"41 °C","SPEED":"0.00"},{"COLOR":0,"INDEX":2,"VEHICLE":1,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Bastien De Marco","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"","TREND":0,"LAPS":2,"LAPTIME":"25.000","ABSOLUTTIME":"00:45.000","BESTTIME":"25.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"},{"COLOR":2,"INDEX":3,"VEHICLE":3,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Jean Paul Michel","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"","TREND":0,"LAPS":1,"LAPTIME":"27.000","ABSOLUTTIME":"00:27.000","BESTTIME":"27.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"},{"COLOR":3,"INDEX":4,"VEHICLE":4,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Jean Paul Michel","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"","TREND":0,"LAPS":1,"LAPTIME":"28.000","ABSOLUTTIME":"00:27.000","BESTTIME":"27.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"},{"COLOR":4,"INDEX":5,"VEHICLE":6,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Jean Paul Michel","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"","TREND":0,"LAPS":1,"LAPTIME":"29.000","ABSOLUTTIME":"00:29.000","BESTTIME":"27.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"},{"COLOR":5,"INDEX":6,"VEHICLE":5,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Jean Paul Michel","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"!","TREND":0,"LAPS":1,"LAPTIME":"31.000","ABSOLUTTIME":"00:31.000","BESTTIME":"27.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"},{"COLOR":6,"INDEX":7,"VEHICLE":7,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Jean Paul Michel","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"!","TREND":0,"LAPS":1,"LAPTIME":"33.000","ABSOLUTTIME":"00:33.000","BESTTIME":"27.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"},{"COLOR":7,"INDEX":8,"VEHICLE":8,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Jean Paul Michel","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"!","TREND":0,"LAPS":1,"LAPTIME":"36.000","ABSOLUTTIME":"00:36.000","BESTTIME":"27.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"},{"COLOR":8,"INDEX":9,"VEHICLE":9,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Jean Paul Michel","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"!","TREND":0,"LAPS":0,"LAPTIME":"40.000","ABSOLUTTIME":"00:40.000","BESTTIME":"27.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"},{"COLOR":9,"INDEX":10,"VEHICLE":10,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Jean Paul Michel","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"!","TREND":0,"LAPS":0,"LAPTIME":"47.000","ABSOLUTTIME":"00:47.000","BESTTIME":"27.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"}]}}');
+        var data = JSON.parse('{"EVENT":{"VERSION":"1.0","KEY":"B18D6AD1E6626F596700","TIMESTAMP":"881117","CONFIG":{"MODE":"LapAndTime","NROFBESTLAPS":0},"METADATA":{"NAME":"gemcseries 2020 : Round 1","SECTION":"TC  [TouringCar]","GROUP":"TouringCar :: Qualification :: Série 1 - Manche 1","RACETIME":"00:05:00","CURRENTTIME":"00:00:42","REMAININGTIME":"00:04:48","COUNTDOWN":"00:00:00","DIVERGENCE":"00:02:30"},"DATA":[{"COLOR":1,"INDEX":1,"VEHICLE":2,"PILOTNUMBER":0,"TRANSPONDER":"8869803","PILOT":"Dominique Vögtli","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"","TREND":0,"LAPS":2,"LAPTIME":"23.058","ABSOLUTTIME":"00:43.058","BESTTIME":"23.058","BESTTIMEN":"0.000","MEDIUMTIME":"23.058","FORECAST":"14 05:22.812","PROGRESS":47,"DELAYTIMEFIRST":"0.000","DELAYTIMEPREVIOUS":"0.000","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"5.9 V","TEMPERATUR":"41 °C","SPEED":"0.00"},{"COLOR":0,"INDEX":2,"VEHICLE":1,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Bastien De Marco","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"","TREND":0,"LAPS":2,"LAPTIME":"25.000","ABSOLUTTIME":"00:45.000","BESTTIME":"25.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"},{"COLOR":2,"INDEX":3,"VEHICLE":3,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Jean Paul Michel","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"","TREND":0,"LAPS":1,"LAPTIME":"27.000","ABSOLUTTIME":"00:27.000","BESTTIME":"27.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"},{"COLOR":3,"INDEX":4,"VEHICLE":4,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Jean Paul Michel","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"","TREND":0,"LAPS":1,"LAPTIME":"28.000","ABSOLUTTIME":"00:27.000","BESTTIME":"27.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"},{"COLOR":4,"INDEX":5,"VEHICLE":6,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Jean Paul Michel","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"","TREND":0,"LAPS":1,"LAPTIME":"29.000","ABSOLUTTIME":"00:29.000","BESTTIME":"27.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"},{"COLOR":5,"INDEX":6,"VEHICLE":5,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Jean Paul Michel","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"!","TREND":0,"LAPS":1,"LAPTIME":"31.000","ABSOLUTTIME":"00:31.000","BESTTIME":"27.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"},{"COLOR":6,"INDEX":7,"VEHICLE":7,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Jean Paul Michel","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"!","TREND":0,"LAPS":1,"LAPTIME":"33.000","ABSOLUTTIME":"00:33.000","BESTTIME":"27.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"},{"COLOR":7,"INDEX":8,"VEHICLE":8,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Jean Paul Michel","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"!","TREND":0,"LAPS":1,"LAPTIME":"36.000","ABSOLUTTIME":"00:36.000","BESTTIME":"27.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"},{"COLOR":8,"INDEX":9,"VEHICLE":9,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Jean Paul Michel","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"!","TREND":0,"LAPS":0,"LAPTIME":"40.000","ABSOLUTTIME":"00:40.000","BESTTIME":"27.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"},{"COLOR":9,"INDEX":10,"VEHICLE":10,"PILOTNUMBER":0,"TRANSPONDER":"","PILOT":"Jean Paul Michel","CLUB":"GeMC","COUNTRY":"CHE","LAPINFO":"!","TREND":0,"LAPS":0,"LAPTIME":"47.000","ABSOLUTTIME":"00:47.000","BESTTIME":"27.000","BESTTIMEN":"0.000","MEDIUMTIME":"0.000","FORECAST":"0 -","PROGRESS":0,"DELAYTIMEFIRST":"","DELAYTIMEPREVIOUS":"","STANDARDDEVIATION":"0.000","CARID":0,"VOLTAGE":"n\/a","TEMPERATUR":"n\/a","SPEED":"0.00"}]}}');
 
         document.getElementById("eventname").innerHTML = data.EVENT.METADATA.NAME;
         document.getElementById("categoryname").innerHTML = data.EVENT.METADATA.GROUP.split("::")[1] + " " + data.EVENT.METADATA.GROUP.split("::")[0] +" | " + data.EVENT.METADATA.GROUP.split("::")[2];
         document.getElementById("round-time").innerHTML = data.EVENT.METADATA.REMAININGTIME;
 		
         var htmlresumetable = "<div class='resume-title'>" + data.EVENT.METADATA.GROUP.split("::")[1] + " " + data.EVENT.METADATA.GROUP.split("::")[0] +"| " + data.EVENT.METADATA.GROUP.split("::")[2] + "</div><table class='resume-table'><tr><th>Pos</th><th>Driver</th><th>Laps</th><th>Time</th><th>Bestlap</th><th>Average</th></tr>";
-        var htmllivecell = "";
-		var htmlnext = "Prochaine manche dans : " + data.EVENT.METADATA.DIVERGENCE;
+        var htmllivetablecell = "";
 		
-        var index = 0;
         var difflap = 0;
         var difftime = 0;
-        var maxdrivers = 12;
-        
-        if (data.EVENT.DATA.length > maxdrivers) {
-            index = maxdrivers;
-        } else {
-            index = data.EVENT.DATA.length;
-        }
 
-        for (i = 0; i < index; i++) {
-            htmlresumetable += "<tr><td>" + data.EVENT.DATA[i].INDEX + "</td><td>" + "<span class = 'driver-color color-" + data.EVENT.DATA[i].COLOR +  "'>" + data.EVENT.DATA[i].VEHICLE + "</span> " + data.EVENT.DATA[i].PILOT + "</td><td>" + data.EVENT.DATA[i].LAPS + "</td><td>" + data.EVENT.DATA[i].ABSOLUTTIME + "</td><td>" + data.EVENT.DATA[i].BESTTIME + "</td><td>" + data.EVENT.DATA[i].MEDIUMTIME + "</td></tr>";
-             			
-			if (data.EVENT.DATA[i].VEHICLE > 12) {
-				data.EVENT.DATA[i].VEHICLE = 12;
-			}
-			
-			document.getElementById(data.EVENT.DATA[i].VEHICLE).classList.remove('hide');
-			
-            if (data.EVENT.DATA[i].LAPINFO == "!") {
-				document.getElementById(data.EVENT.DATA[i].VEHICLE).classList.add('inactive');				
-            }
-            
-            htmllivecell = "<span class = 'driver-color color-" + data.EVENT.DATA[i].COLOR +  "'>" + data.EVENT.DATA[i].VEHICLE + "</span><span class = 'driver-name'>" + data.EVENT.DATA[i].PILOT.split(/\s/).reduce((response,word)=> response+=word.slice(0,1),'') + "</span>";
-            
-            if (i < 1) {
-                htmllivecell += "<span class = 'driver-delta'>" + data.EVENT.DATA[i].LAPS; 
-                
-                if (data.EVENT.DATA[i].LAPS > 1) {
-                            htmllivecell += " Laps</span>";
-                        } else {
-                            htmllivecell += " Lap</span>";
-                        }
-                
-            } else {
-                difflap = parseInt(data.EVENT.DATA[i-1].LAPS - data.EVENT.DATA[i].LAPS);
-                
-                if (difflap > 0){
-                       htmllivecell += "<span class = 'driver-delta'>+" + difflap;
-                        if (difflap > 1) {
-                            htmllivecell += " Laps</span>";
-                        } else {
-                            htmllivecell += " Lap</span>";
-                        }
-                } else {
-                    difftime = parseFloat(data.EVENT.DATA[i].ABSOLUTTIME.split(":")[1]) - parseFloat(data.EVENT.DATA[i-1].ABSOLUTTIME.split(":")[1]);
-                    htmllivecell += "<span>+" + difftime.toFixed(3) + "</span>";
-                }
-            }
-            htmllivecell += "</div>";
-			document.getElementById(data.EVENT.DATA[i].VEHICLE).innerHTML = htmllivecell;
-			document.getElementById(data.EVENT.DATA[i].VEHICLE).removeAttribute('class');
-			document.getElementById(data.EVENT.DATA[i].VEHICLE).classList.add('cell');		
-			document.getElementById(data.EVENT.DATA[i].VEHICLE).classList.add('live-table-position'+ i);
-			document.getElementById("live").style.height = 80 + i * 30 + "px";			
+        for (i = 0; i < maxdrivers; i++) {
+		    if (i >= data.EVENT.DATA.length) {
+				document.getElementById(i+1).classList.add('hide');
+			} else {
+				htmlresumetable += "<tr><td>" + data.EVENT.DATA[i].INDEX + "</td><td>" + "<span class = 'driver-color'>" + data.EVENT.DATA[i].VEHICLE + "</span> " + data.EVENT.DATA[i].PILOT + "</td><td>" + data.EVENT.DATA[i].LAPS + "</td><td>" + data.EVENT.DATA[i].ABSOLUTTIME + "</td><td>" + data.EVENT.DATA[i].BESTTIME + "</td><td>" + data.EVENT.DATA[i].MEDIUMTIME + "</td></tr>";
+				
+				document.getElementById(i+1).classList.remove('hide');
+				
+				if (data.EVENT.DATA[i].LAPINFO == "L" || "M") {
+					document.getElementById(data.EVENT.DATA[i].VEHICLE).classList.add('inactive');				
+				}
+				
+				htmllivetablecell = "<span class = 'driver-color color-" + data.EVENT.DATA[i].COLOR +  "'>" + data.EVENT.DATA[i].VEHICLE + "</span><span class = 'driver-name'>" + data.EVENT.DATA[i].PILOT.split(/\s/).reduce((response,word)=> response+=word.slice(0,1),'') + "</span><span class='driver-delta'>";
+				
+				if (i < 1) {
+					htmllivetablecell += data.EVENT.DATA[i].LAPS; 
+					
+					if (data.EVENT.DATA[i].LAPS > 1) {
+								htmllivetablecell += " Laps";
+							} else {
+								htmllivetablecell += " Lap";
+							}
+					
+					} else {
+						difflap = parseInt(data.EVENT.DATA[i-1].LAPS - data.EVENT.DATA[i].LAPS);
+						
+						if (difflap > 0){
+							   htmllivetablecell += "+" + difflap;
+								if (difflap > 1) {
+									htmllivetablecell += " Laps";
+								} else {
+									htmllivetablecell += " Lap";
+								}
+						} else {
+							difftime = parseFloat(data.EVENT.DATA[i].ABSOLUTTIME.split(":")[1]) - parseFloat(data.EVENT.DATA[i-1].ABSOLUTTIME.split(":")[1]);
+							htmllivetablecell += "+" + difftime.toFixed(3);
+						}
+					}
+				htmllivetablecell += "</span></div>";
+				
+				if (data.EVENT.DATA[i].VEHICLE <= maxdrivers) {
+				document.getElementById(data.EVENT.DATA[i].VEHICLE).innerHTML = htmllivetablecell;
+				document.getElementById(data.EVENT.DATA[i].VEHICLE).removeAttribute('class');
+				document.getElementById(data.EVENT.DATA[i].VEHICLE).classList.add('live-table-cell');			
+				document.getElementById(data.EVENT.DATA[i].VEHICLE).style.top = (i*cellsize + 60) + "px";
+				}
+				document.getElementById("live").style.height = 80 + i * cellsize + "px";
+			}			
         }
         
         htmlresumetable += "</table>";
-
-        document.getElementById("resume").innerHTML = htmlresumetable;
+		document.getElementById("resume").innerHTML = htmlresumetable;
 		
+		var htmlnext = "Prochaine manche dans : " + data.EVENT.METADATA.DIVERGENCE;
+		document.getElementById("next").innerHTML = htmlnext;
+
 		var timingstatus = 0;
 		/*
-			0 = waiting
+			0 = standby
 			1 = nextrace schedule
 			2 = race preparation
 			3 = race running
 			4 = race ended
 		*/
 		
-		const now = Date.now();
-		const waitime = 100000;
-		var endtime = 0;
+		var now = Date.now();	
 		
-		if (data.EVENT.METADATA.DIVERGENCE.split(":")[1] > 3) {
+		if (data.EVENT.METADATA.DIVERGENCE.split(":")[1] > 3 || data.EVENT.METADATA.DIVERGENCE.split(":")[0] > 0) {
 			timingstatus = 1;
+			endtime = 9582744014867;
 		} else {
-			if (data.EVENT.METADATA.COUNTDOWN == "00:00:30" || data.EVENT.METADATA.REMAININGTIME != data.EVENT.METADATA.RACETIME)		{
+			if (data.EVENT.METADATA.COUNTDOWN == "00:00:30") {
+				endtime = 9582744014867;
+			}
+			if (data.EVENT.METADATA.COUNTDOWN == "00:00:30" || data.EVENT.METADATA.CURRENTIME != data.EVENT.METADATA.RACETIME) {
 				timingstatus = 3;
-				if (data.EVENT.METADATA.REMAININGTIME == "00:00:01") {
+				if ( data.EVENT.METADATA.REMAININGTIME == "00:00:01") {
 					endtime = Date.now();
 				}
-				if (now < endtime + waitime) {
-					var timingstatus = 4;
+				if (now> endtime + waittime) {
+					timingstatus = 4;
 				}
-			} else if (data.EVENT.METADATA.REMAININGTIME == data.EVENT.METADATA.RACETIME) {
-					timingstatus = 2;
-			}				
-		}
-			
+			}
+			else {
+				timingstatus = 2;
+			}
+		}	
+		
+		// DEV TOOLS		
+		console.log(timingstatus);
+		timingstatus = 5;	//show all tables
+	
 		switch (timingstatus) {
 			case 0:
 				//waiting
@@ -184,7 +197,14 @@
 				document.getElementById("resume").classList.remove('out');
 				document.getElementById("next").classList.add('out');
 				break;
+			case 5:
+				//dev mod
+				document.getElementById("live").classList.remove('out');
+				document.getElementById("resume").classList.remove('out');
+				document.getElementById("next").classList.remove('out');
+				break;
 		}
+	//}
     </script>
 </body>
 </html>
