@@ -48,6 +48,7 @@ body {
     color: white;
     background-color: rgba(0,0,0,0.8);
     padding: 10px;
+	border-radius : 6px;
 }
 
 .live.out {
@@ -64,6 +65,9 @@ body {
     font-size: 32px;
     font-weight: 700;
     margin-bottom: 10px;
+	background-color: #3AB54A;
+	background-image: url('assets/header_background.png');
+	border-radius : 3px;
 }
 
 .live-table {
@@ -96,7 +100,8 @@ body {
     width: 600px;
     color: white;
     background-color: rgba(0,0,0,0.8);
-    padding: 20px;
+    padding: 10px;
+	border-radius : 6px;
 }
 
 .resume.out {
@@ -111,9 +116,16 @@ body {
 .resume-title {
     font-size: 18px;
     font-weight: 700;
+	margin-top: 2px;
+	margin-left: 2px;
+	margin-right: 2px;
     margin-bottom: 10px;
 	text-transform: uppercase;
 	text-align: center;
+	background-color: #3AB54A;
+	background-image: url('assets/header_background.png');
+	padding: 10px;
+	border-radius : 3px;
 }
 
 .resume-table {
@@ -177,6 +189,7 @@ body {
     font-weight: 700;
     color: black;
     background-color:white;
+	border-radius : 3px;
 }
 
 .driver-name {
