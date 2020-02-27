@@ -2,6 +2,10 @@ body {
    margin: 0;
 }
 
+.hide {
+	visibility: hidden;
+}
+
 .window {
 	width:	1280px;
 	height: 720px;
@@ -58,6 +62,68 @@ body {
 
 .live-table {
   width: 100%; 
+}
+
+.cell {
+	position: absolute;
+	-webkit-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-ms-transition: 0.5s;
+	-o-transition: 0.5s;
+	transition: 0.5s;
+	right: 10px;
+    width: 150px;
+}
+
+.live-table-position0 {
+    top: 60px;
+}
+
+.live-table-position1 {
+    top: 90px;
+}
+
+.live-table-position2 {
+    top: 120px;
+}
+
+.live-table-position3 {
+    top: 150px;
+}
+
+.live-table-position4 {
+    top: 180px;
+}
+
+.live-table-position5 {
+    top: 210px;
+}
+
+.live-table-position6 {
+    top: 240px;
+}
+.live-table-position7 {
+    top: 270px;
+}
+
+.live-table-position8 {
+    top: 300px;
+}
+
+.live-table-position9 {
+    top: 330px;
+}
+
+.live-table-position10 {
+    top: 360px;
+}
+
+.live-table-position11 {
+    top: 390px;
+}
+
+.live-table-position12 {
+    top: 420px;
 }
 
 .resume {
@@ -143,6 +209,10 @@ body {
     font-weight: 700;
     color: black;
     background-color:white;
+}
+
+.driver-name {
+	margin-right: 10px;
 }
 
 .color-0 {
