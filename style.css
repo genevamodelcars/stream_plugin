@@ -34,7 +34,7 @@ body {
 	margin-bottom: 10px;
 	padding-left: 10px;
 	padding-right: 10px;
-	background-color: #3AB54A;
+	background-color: #0E76BD;
 	background-image: url('assets/header_background.png');
 	border-radius : 3px;
 	text-align : center;
@@ -78,7 +78,7 @@ body {
     font-size: 32px;
     font-weight: 700;
     margin-bottom: 10px;
-	background-color: #3AB54A;
+	background-color: #0E76BD;
 	background-image: url('assets/header_background.png');
 	border-radius : 3px;
 }
@@ -135,7 +135,7 @@ body {
     margin-bottom: 10px;
 	text-transform: uppercase;
 	text-align: center;
-	background-color: #3AB54A;
+	background-color: #0E76BD;
 	background-image: url('assets/header_background.png');
 	padding: 10px;
 	border-radius : 3px;
@@ -163,11 +163,12 @@ body {
     bottom: 10px;
     left: 10px;
     font-size: 18px;
-    font-weight: 700;
-	text-transform: uppercase;
+    font-weight: 500;
+	font-style: italic;
     color: white;
     background-color: rgba(0,0,0,0.8);
-    padding: 10px;
+    padding: 7px;
+	border-radius : 6px;
 }
 
 .next.out {
