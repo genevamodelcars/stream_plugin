@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>gemc stream xsplit plugin</title>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<script src="js/xjs.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<body>
+
+<div class='window'>
+	<div class='smalltable'>
+		<div id="smalltable"></div>
+	</div>
+	<div class='resumetable' id='resumetable'>
+	</div>
+	<div class='gemclogo'><div id="timeleft" class="timeleft"> </div><div id="eventname" class="eventname"></div> - <b>geneva</b>modelcars</div>
+	<span id="countdowntimer" class="countdowntimer"></span>
+</div>
+
+<script>
+    var socket = new WebSocket('ws://192.168.1.129:8787');
+
+	socket.onmessage=function(event) { 
+		var data = JSON.parse(event.data);
+		document.getElementById("eventname").innerHTML = data.EVENT.METADATA.GROUP;
+		var htmlresumetable = "<table class='resume'><tr><th>Pos</th><th>Driver</th><th>Laps</th><th>Time</th><th>Bestlap</th><th>Average</th></tr>";
+		var htmlsmalltable = "<table class ='small'><tr>";
+			
+		for (i = 0; i < data.EVENT.DATA.length; i++) {
+			htmlresumetable += "<tr><td>" + data.EVENT.DATA[i].INDEX + "</td><td><b>" + data.EVENT.DATA[i].PILOT + "</b></td><td>" + data.EVENT.DATA[i].LAPS + "</td><td>" + data.EVENT.DATA[i].ABSOLUTTIME + "</td><td>" + data.EVENT.DATA[i].BESTTIME + "</td><td>" + data.EVENT.DATA[i].MEDIUMTIME + "</td></tr>";
+			htmlsmalltable += "<td><div class='pos'>P" +  data.EVENT.DATA[i].INDEX + "</div></br><b>" + data.EVENT.DATA[i].PILOT + "</b></br>L" + data.EVENT.DATA[i].LAPS + ": " + data.EVENT.DATA[i].ABSOLUTTIME + "</br>L:" + data.EVENT.DATA[i].LAPTIME + " B:" + data.EVENT.DATA[i].BESTTIME + "</td>"
+		}
+		htmlresumetable += "</table>";
+		htmlsmalltable += "</tr></table>";
+		
+		document.getElementById("resumetable").innerHTML = htmlresumetable;
+		document.getElementById("smalltable").innerHTML = htmlsmalltable;
+		
+		if (data.EVENT.METADATA.COUNTDOWN == "00:00:00"){
+			document.getElementById("timeleft").innerHTML = data.EVENT.METADATA.REMAININGTIME;
+		} else {
+			document.getElementById("timeleft").innerHTML = data.EVENT.METADATA.COUNTDOWN;
+		}
+		
+		if (data.EVENT.METADATA.COUNTDOWN == "00:00:30") {
+		$("#resumetable").fadeOut(1000);
+		}
+		
+		if (data.EVENT.METADATA.CURRENTTIME == data.EVENT.METADATA.RACETIME) {
+		$("#resumetable").fadeIn(1000);
+		}
+		
+		if (data.EVENT.METADATA.CURRENTTIME == "00:00:01") {
+		$("#resumetable").hide();
+		}
+		
+		if (data.EVENT.METADATA.COUNTDOWN == "00:00:11") {
+		    var timeleft = 11;
+			var downloadTimer = setInterval(function(){
+			timeleft--;
+			
+			if(timeleft < 1) {
+					if (timeleft == 0) {
+					$("#countdowntimer").fadeIn(250);
+					document.getElementById("countdowntimer").textContent = "Go!";
+					$("#countdowntimer").fadeOut(1000);
+					clearInterval(downloadTimer);
+					}
+			}
+			else {
+				$("#countdowntimer").fadeIn(0);
+				document.getElementById("countdowntimer").textContent = timeleft;
+				$("#countdowntimer").fadeOut(1000);
+			}
+			},1000);
+		}	
+	};
+</script>
+
+</body>
+</html>
