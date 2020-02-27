@@ -1,0 +1,6 @@
+
+
+Q:
+
+	. encodage de 'Json example/race.json' en UTF-16 Little-Endian ?..
+

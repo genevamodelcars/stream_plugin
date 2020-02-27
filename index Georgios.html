@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+        <title>gemc stream xsplit plugin</title>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<script src="js/xjs.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="js/ajax.js" type="text/javascript"></script>
+
+<script src="js/readSocketMessage.js"></script>
+
+<body>
+
+<div class='window'>
+	<div class='smalltable'>
+		<div id="smalltable"></div>
+	</div>
+	<div class='resumetable' id='resumetable'>
+	</div>
+	<div class='gemclogo'><div id="timeleft" class="timeleft"> </div><div id="eventname" class="eventname"></div> - <b>geneva</b>modelcars</div>
+	<span id="countdowntimer" class="countdowntimer"></span>
+</div>
+
+<script>
+
+	/*
+	var socket				= new WebSocket ('ws://192.168.1.129:8787');
+		socket.onmessage	= function (event)
+							{
+								readSocketMessage (JSON.parse (event.data));
+							};
+	*/
+	
+	// sample data..
+	var fname = "./Json example/race UTF-16 LE.json";
+	var xhr = createXHR ();
+	xhr.open ("GET", fname, true);
+	xhr.onreadystatechange = function () 
+	{
+		if (xhr.readyState == 4) 
+		{
+			if (xhr.status != 404) 
+			{
+				var data = eval ("(" + xhr.responseText + ")");
+				readSocketMessage (data);
+			} 
+			else
+			{
+			//	console.log (" not found !");
+			}
+		}
+	}
+	xhr.send (null);
+
+</script>
+
+</body>
+</html>
