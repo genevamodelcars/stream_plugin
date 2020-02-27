@@ -7,37 +7,103 @@ var Application = Application || {};
 Application.DemoFxCanvas = (function (self)
 {
 
-
 //	=== P U B L I C ========================================================================================
 
+	/**
+	 * Animate de alpha.
+	 */
+	self.setAlpha = function (value)
+	{
+		createjs.Ticker.addEventListener ('tick', tickHandler);
+
+		createjs.Tween	.get	(stage, { loop:false, override:true })
+						.to		({ alpha:value }, 1000, createjs.Ease.getPowInOut(2))
+						.call	(function ()
+								{
+									if (stage.alpha <= 0.1)
+									{
+										createjs.Ticker.removeEventListener ('tick', tickHandler);
+									}
+								}, null, this)
+						;
+	};
+
+	/**
+	 * Targeting the HTMLElement.
+	 */
 	self.setTargetId = function (id)
 	{
+		if (document.getElementById (id) == _target && _target != null)
+		return;
+
 		_target = document.getElementById (id);
 		
-		_destroy ();
-		_init ();
+		if (_target)	_init ();
 	};
 
 	
 //	=== P R I V A T E ======================================================================================
 	
-	var _target;
-	
-	function _destroy ()
+	var _target;	// HTMLElement
+	var stage;		// createjs.StageGL
+
+	// TODO: only once on tick..
+	function _invalidate (flag)
 	{
-		//console.log ("_destroy..");
-		// ..
+		switch (flag)
+		{
+			case 'invalidateData':
+			//	zog ("invalidate Data..");
+				break;
+
+			case 'invalidateSize':
+			case 'invalidateLayout':
+			//	zog ("invalidate Layout..");
+				// vars..
+				ratio = stage.canvas.width / stage.canvas.height;
+				//baseTime = ratio;
+				center.set (stage.canvas.width / 2, stage.canvas.height / 2);
+				beamWidth = stage.canvas.width * 1.2;
+				for (let i = 0; i < beamInstances.length; i++)
+				{
+					beamInstances [i].width = beamWidth;
+				}
+				//Beam.globalTimeScalar = canvasWidth/canvasHeight;
+				break;
+		}
 	}
-	
+
 	function _init ()
 	{
-		//console.log ("_init..");
-		// ..
+		if (stage)
+		return;
+		
+		stage					= new createjs.StageGL (_target.id, {preserveBuffer:false, antialias:false, transparent:true});
+		stage.enableDOMEvents	(true);
+		stage.tickChildren		= false;
+		stage.tickEnabled		= false;
+		stage.tickOnUpdate		= false;
+		stage.alpha				= 0;
+
+		createjs.Ticker.timingMode	= createjs.Ticker.RAF;
+
+		_target.style.display	= "block";
+
+		window.onresize = windowResizeHandler;
+		windowResizeHandler ();
+	}
 		
 		
 		
 		
-		
+
+
+
+
+
+
+
+
 
 
 
@@ -49,48 +115,216 @@ Application.DemoFxCanvas = (function (self)
 		
 // ==================================================================================================		
 
-// TODO: on resize, adjust scale !..
 
 
-		var baseTime = 1;
-		var globalTimeScalar = 1.5;
-		var timeDelta = 0;
-		var globalParticleCount;
+	var baseTime			= 1;
+	var globalTimeScalar	= 1.5;
+		globalTimeScalar	= .5;
+//		globalTimeScalar	= 5;
+	var timeDelta			= 0;
+		timeDelta			= 10;
+	var globalParticleCount;
+	
+	var canvasWidth		= window.innerWidth;
+	var canvasHeight	= window.innerHeight;
+
+	var ratio			= canvasWidth / canvasHeight;
+	var center			= new Vexr.Vector3 (canvasWidth / 2, canvasHeight / 2);
+	var mouse			= new Vexr.Vector3 (window.innerWidth / 2, window.innerHeight / 2, 0);
+
+	var addBeams		= false;
+
+	var beamWidth		= canvasWidth * 1.2;
+
+	var spriteSheet;
+
+	var queue				= new createjs.LoadQueue ();
+		queue.on			('complete', assetsLoadedHandler);
+		queue.loadManifest	([
+								{src: "./assets/dot.png", id: 'gfx'}
+							]);
+
+
+	var beamInstances	= [];		// !..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Functions :
+// ==================================================================================================		
+
+function assetsLoadedHandler ()
+{
+	var data = {
+		images: ["./assets/dot.png"],
+		frames: [
+			// x, y, width, height, imageIndex*, regX*, regY*
+			[0, 0, 128, 128, 0, 64, 64]
+		],
+		animations: {
+			dot: 0
+		}
+	};
+
+	spriteSheet = new createjs.SpriteSheet (data);
+
+	createBeams ();
+}
+
+function createBeams ()
+{
+	var particleSprite = new createjs.Sprite (spriteSheet, "dot");
+
+	new BeamGroup (2000, 0.7, beamWidth, canvasHeight / 3, 0, 0.3, particleSprite, beamInstances);
+	new BeamGroup (2000, 0.8, beamWidth, canvasHeight / 2.5, canvasWidth / 2, 0.2, particleSprite, beamInstances);
+	new BeamGroup (250, 0.65, beamWidth, canvasHeight / 4, canvasWidth, 0.1, particleSprite, beamInstances);
+	
+	var beams = [
+		{
+			density: 300,
+			scatter: 600,
+			width: beamWidth,
+			height: canvasHeight / 2,
+			particleOpacity: .08,
+			particleScale: 1.5,
+			timeRate: .4,
+			rotateSpeed: 0.3,
+			parallax: 0.1,
+			phase: canvasWidth / 2,
+			y: -canvasHeight / 5
+		}, {
+			density: 300,
+			scatter: 450,
+			width: beamWidth,
+			height: canvasHeight / 1.5,
+			particleOpacity: .05,
+			particleScale: 2.5,
+			timeRate: 0.5,
+			rotateSpeed: 0.2,
+			parallax: .05,
+			phase: canvasWidth / 4,
+			y: (canvasHeight / 5) * 2
+		}
+	];
+
+	for (let i = 0; i < beams.length; i++)
+	{
+		let beam = new Beam (beams [i], particleSprite);
+		beamInstances.push (beam);
+		stage.addChild (beam);
+	}
+
+}
+
+function windowResizeHandler ()
+{
+//	zog (window.innerWidth + " x " + window.innerHeight);
+
+	canvasWidth		= window.innerWidth;
+	canvasHeight	= window.innerHeight;
+
+	// update the Canvas size..
+	stage.canvas.width		= window.innerWidth;
+	stage.canvas.height		= window.innerHeight;
+	
+	// update the WebGL viewport..	(the render surface's)
+	stage.updateViewport	(stage.canvas.width, stage.canvas.height);
+
+	// ..
+	_invalidate ('invalidateLayout');
+}
+
+function tickHandler ()
+{
+//	zog ("tickHandler..");
+
+	// update all beams..
+	var start	= performance.now ();
+	var p		= Vexr.Vector3.multiply (mouse, 0.5);
+	var loc		= Vexr.Vector3.add (p, center, p);
+	for (let i = 0; i < beamInstances.length; i++)
+	{
+		let beam = beamInstances [i];
+		beam.trackingPoint = Vexr.Vector3.add (Vexr.Vector3.multiply (mouse, beam.parallax), center, loc);
+		beam.update ();
+	}
+
+	stage.update ();
+	Beam.timeDelta = performance.now () - start;
+}
+
+// ==================================================================================================		
+	
 		
-		globalTimeScalar = .5;
-		timeDelta = 10;
 		
-/**
- * Globals and Imports
- */
+		
 
-var queue = new createjs.LoadQueue ();
-queue.on ("complete", init);
-queue.loadManifest ([
-	{src: "./assets/dot.png", id: "gfx"}
-]);
 
-//_target.setAttribute ("width", window.innerWidth);
-//_target.setAttribute ("height", window.innerHeight);
 
-var stage = new createjs.StageGL (_target.id, {antialias:true, transparent:true});
-//stage.setClearColor ("#1C9ECF");
-var canvasWidth = window.innerWidth;
-var canvasHeight = window.innerHeight;
-stage.canvas.width = canvasWidth;
-stage.canvas.height = canvasHeight;
 
-var ratio = canvasWidth / canvasHeight;
-var center = new Vexr.Vector3(canvasWidth / 2, canvasHeight / 2);
-var mouse = new Vexr.Vector3(window.innerWidth / 2, window.innerHeight / 2, 0);
 
-var addBeams = false;
 
-var beamWidth = canvasWidth * 1.2;
 
-var spriteSheet;
 
-stage.update();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Classes :
+// ==================================================================================================		
+
 
 /**
  * Beam Classes
@@ -107,6 +341,7 @@ class Beam extends createjs.Container {
 		globalTimeScalar = value;
 	}
 
+	/*
 	static get timeDelta() {
 		return timeDelta;
 	}
@@ -114,6 +349,7 @@ class Beam extends createjs.Container {
 	static set timeDelta(value) {
 		timeDelta = value;
 	}
+	*/
 
 	static get timeDelta() {
 		return globalParticleCount;
@@ -206,21 +442,28 @@ class Beam extends createjs.Container {
 	}
 }
 
+
+
+
+
+
 /**
  *
  * Creates a bunch of beams that all follow the same wave
  */
 
 var beamgroups = [];
-class BeamGroup {
 
+class BeamGroup
+{
 	static get beams() {
 		return beamgroups;
 	}
 
-	constructor(density, scale, width, height, phase, parallax, sprite, collection) {
+	constructor (density, scale, width, height, phase, parallax, sprite, collection)
+	{
 		var dist = density / 6;
-		beamgroups.push(this);
+		beamgroups.push (this);
 		this.beamCollection = [];
 		this.seed = Math.random() * 1.5;
 		this.speed = 1 + Math.random();
@@ -265,142 +508,16 @@ class BeamGroup {
 				rotateSpeed: this.seed
 			}
 		];
-		for (let i = 0; i < this.beams.length; i++) {
-			let beam = new Beam(this.beams[i], sprite);
-			this.beamCollection.push(beam);
-			collection.push(beam);
+		for (let i = 0; i < this.beams.length; i++)
+		{
+			let beam = new Beam (this.beams[i], sprite);
+			this.beamCollection.push (beam);
+			collection.push (beam);
 			stage.addChild(beam);
 		}
 	}
 }
 
-/**
- * Functions
- */
-
-function init() {
-
-	var data = {
-		images: ["./assets/dot.png"],
-		frames: [
-			// x, y, width, height, imageIndex*, regX*, regY*
-			[0, 0, 128, 128, 0, 64, 64]
-		],
-		animations: {
-			dot: 0
-		}
-	};
-
-	spriteSheet = new createjs.SpriteSheet (data);
-
-	createjs.Ticker.timingMode = createjs.Ticker.RAF;
-	createjs.Ticker.addEventListener("tick", update);
-
-	_target.style.display = "block";
-
-	createBeams();
-
-
-	stage.on("resize", resize);
-
-	resize();
-
-
-}
-
-var beamInstances = [];
-function createBeams() {
-	var particleSprite = new createjs.Sprite(spriteSheet, "dot");
-	new BeamGroup(2000, 0.7, beamWidth, canvasHeight / 3, 0, 0.3, particleSprite, beamInstances);
-	new BeamGroup(2000, 0.8, beamWidth, canvasHeight / 2.5, canvasWidth / 2, 0.2, particleSprite, beamInstances);
-	new BeamGroup(250, 0.65, beamWidth, canvasHeight / 4, canvasWidth, 0.1, particleSprite, beamInstances);
-
-	var beams = [
-		{
-			density: 300,
-			scatter: 600,
-			width: beamWidth,
-			height: canvasHeight / 2,
-			particleOpacity: .08,
-			particleScale: 1.5,
-			timeRate: .4,
-			rotateSpeed: 0.3,
-			parallax: 0.1,
-			phase: canvasWidth / 2,
-			y: -canvasHeight / 5
-		}, {
-			density: 300,
-			scatter: 450,
-			width: beamWidth,
-			height: canvasHeight / 1.5,
-			particleOpacity: .05,
-			particleScale: 2.5,
-			timeRate: 0.5,
-			rotateSpeed: 0.2,
-			parallax: .05,
-			phase: canvasWidth / 4,
-			y: (canvasHeight / 5) * 2
-		}
-	];
-
-	for (let i = 0; i < beams.length; i++) {
-		let beam = new Beam(beams[i], particleSprite);
-		beamInstances.push(beam);
-		stage.addChild(beam);
-	}
-
-}
-
-
-function resize() {
-	canvasWidth = window.innerWidth;
-	canvasHeight = window.innerHeight;
-	stage.canvas.width = canvasWidth;
-	stage.canvas.height = canvasHeight;
-
-	stage.updateViewport(canvasWidth, canvasHeight);
-
-	ratio = canvasWidth / canvasHeight;
-	//baseTime = ratio;
-	center.set(canvasWidth / 2, canvasHeight / 2);
-
-	if (canvasWidth < 1200) {
-		canvasWidth = 1200;
-	}
-
-	beamWidth = canvasWidth * 1.2;
-
-	for (let i = 0; i < beamInstances.length; i++) {
-		beamInstances[i].width = beamWidth;
-	}
-
-	//Beam.globalTimeScalar = canvasWidth/canvasHeight;
-
-	stage.update();
-}
-
-function update() {
-	var start = performance.now();
-	var p = Vexr.Vector3.multiply(mouse, 0.5);
-	var loc = Vexr.Vector3.add(p, center, p);
-
-	for (let i = 0; i < beamInstances.length; i++) {
-		let beam = beamInstances[i];
-		beam.trackingPoint = Vexr.Vector3.add(Vexr.Vector3.multiply(mouse, beam.parallax), center, loc);
-		beam.update();
-	}
-
-	stage.update();
-	Beam.timeDelta = performance.now() - start;
-}
-
-// ==================================================================================================		
-	
-		
-		
-		
-
-
 
 		
 		
@@ -410,7 +527,6 @@ function update() {
 		
 		
 		
-	} // end of _init
 
 
 //	=== E N D ==============================================================================================

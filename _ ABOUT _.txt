@@ -5,6 +5,7 @@ Q:
 	. encodage de 'Json example/race.json' en UTF-16 Little-Endian ?..
 
 TODO:
+====
 
 	. use ZimJS..
 
@@ -12,3 +13,6 @@ TODO:
 
 	. class package..
 
+	. scale / resize ?..
+
+	. ThreeJS Post Processing..

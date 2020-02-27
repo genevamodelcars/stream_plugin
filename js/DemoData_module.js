@@ -37,28 +37,43 @@ Application.DemoData = (function (self)
 	
 	function _init ()
 	{
-	//	console.log ("_init..");
-		
-//		var fname = "./Json example/race UTF-16 LE.json";
-		var fname = "./Json example/race UTF-16 LE 02.json";
-		var requestXHR = createXHR ();
-		requestXHR.open ("GET", fname, true);
-		requestXHR.onreadystatechange = function () 
+		_load ("./Json example/race UTF-16 LE 02.json");
+
+		// TODO: simulate..
+		/*
+		var downloadTimer = setInterval (function ()
 		{
-			if (requestXHR.readyState == 4) 
-			{
-				if (requestXHR.status != 404) 
-				{
-					_json = eval ("(" + requestXHR.responseText + ")");
-					_callback (_json);
-				} 
-				else
-				{
-				//	console.log (" not found !");
-				}
-			}
-		}
-		requestXHR.send (null);
+			clearInterval (downloadTimer);
+			// load..
+		//	_load ("./Json example/race UTF-16 LE 02.json");
+			// or, modify current..
+			_json.EVENT.METADATA.COUNTDOWN = "00:00:11";
+			_callback (_json);
+
+		}, 2000);
+		*/
+	}
+
+	function _load (filename)
+	{
+		var requestXHR						= createXHR ();
+			requestXHR.open					("GET", filename, true);
+			requestXHR.onreadystatechange	= function () 
+											{
+												if (requestXHR.readyState == 4) 
+												{
+													if (requestXHR.status != 404) 
+													{
+														_json = eval ("(" + requestXHR.responseText + ")");
+														_callback (_json);
+													} 
+													else
+													{
+													//	console.log (" not found !");
+													}
+												}
+											}
+			requestXHR.send					(null);
 	}
 
 		

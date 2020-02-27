@@ -1,84 +1,217 @@
 <!DOCTYPE html>
 <html>
-<head>
-        <title>gemc stream xsplit plugin</title>
-        <link rel="stylesheet" type="text/css" href="style.css" />
-</head>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-<script src="js/xjs.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<title>gemc stream xsplit plugin</title>
+		
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		
+		<!-- Libraries -->
+		<script src="libs/xjs.js"></script>
+		<script src="libs/jquery.min.js"></script>
+		<script src="libs/createjs_1.1_min.js"></script>
+		<script src="libs/zim_10.0.1.js"></script>
+		<script src='libs/Vector3.js'></script>
+		
+		<!-- Classes -->
+		<script src='js/ch/gemc/myresults/results/ResumeTable.js'></script>
+		<script src='js/ch/gemc/myresults/results/resumeTableClasses/ColumnConfig.js'></script>
+		<script src='js/ch/gemc/myresults/results/resumeTableClasses/TableCellHeader.js'></script>
+		<script src='js/ch/gemc/myresults/results/resumeTableClasses/TableCell.js'></script>
+		<script src='js/ch/gemc/myresults/results/resumeTableClasses/TableCell.POS.js'></script>
+		<script src='js/ch/gemc/myresults/results/resumeTableClasses/TableCell.DRIVER.js'></script>
+		<script src='js/ch/gemc/myresults/results/resumeTableClasses/TableRowHeader.js'></script>
+		<script src='js/ch/gemc/myresults/results/resumeTableClasses/TableRow.js'></script>
 
-<body>
+		<!-- Modules ?.. -->
+		<script src='js/DemoFxCanvas_module.js'></script>
+		<script src='js/ResumeTableCanvas_module.js'></script>
+		<script src='js/DemoData_module.js'></script>
+		
+	</head>
+	
+	
+	<body onclick='clickHandler ()''>
+		
+		<canvas id='fxCanvas'></canvas>
+		<!--
+		<canvas id='resumeTableCanvas'></canvas>
+		-->
+		<div id='resumeTableDiv'></div>
+		
+		<div class='window' id='windowID'>
+			<div class='smalltable'>
+				<div id='smalltable'></div>
+			</div>
+			<!--
+			<div class='resumetable' id='resumetable'>
+			-->
+			</div>
+			<div class='gemclogo'>
+				<div id='timeleft' class='timeleft'></div>
+				<div id='eventname' class='eventname'></div>
+			</div>
+			<span id='countdowntimer' class='countdowntimer'></span>
+		</div>
+		
+		<!-- Code -->
+		<script src="js/drawHtmlTable.js"></script>
+		<script>
 
-<div class='window'>
-	<div class='smalltable'>
-		<div id="smalltable"></div>
-	</div>
-	<div class='resumetable' id='resumetable'>
-	</div>
-	<div class='gemclogo'><div id="timeleft" class="timeleft"> </div><div id="eventname" class="eventname"></div> - <b>geneva</b>modelcars</div>
-	<span id="countdowntimer" class="countdowntimer"></span>
-</div>
-
-<script>
-    var socket = new WebSocket('ws://192.168.1.129:8787');
-
-	socket.onmessage=function(event) { 
-		var data = JSON.parse(event.data);
-		document.getElementById("eventname").innerHTML = data.EVENT.METADATA.GROUP;
-		var htmlresumetable = "<table class='resume'><tr><th>Pos</th><th>Driver</th><th>Laps</th><th>Time</th><th>Bestlap</th><th>Average</th></tr>";
-		var htmlsmalltable = "<table class ='small'><tr>";
+			/*
+			var socket				= new WebSocket ('ws://192.168.1.129:8787');
+				socket.onmessage	= function (event)
+									{
+										var json = JSON.parse (event.data);
+										drawHtmlTable (json);
+										Application.ResumeTableCanvas.setData (json);
+									};
+			*/
 			
-		for (i = 0; i < data.EVENT.DATA.length; i++) {
-			htmlresumetable += "<tr><td>" + data.EVENT.DATA[i].INDEX + "</td><td><b>" + data.EVENT.DATA[i].PILOT + "</b></td><td>" + data.EVENT.DATA[i].LAPS + "</td><td>" + data.EVENT.DATA[i].ABSOLUTTIME + "</td><td>" + data.EVENT.DATA[i].BESTTIME + "</td><td>" + data.EVENT.DATA[i].MEDIUMTIME + "</td></tr>";
-			htmlsmalltable += "<td><div class='pos'>P" +  data.EVENT.DATA[i].INDEX + "</div></br><b>" + data.EVENT.DATA[i].PILOT + "</b></br>L" + data.EVENT.DATA[i].LAPS + ": " + data.EVENT.DATA[i].ABSOLUTTIME + "</br>L:" + data.EVENT.DATA[i].LAPTIME + " B:" + data.EVENT.DATA[i].BESTTIME + "</td>"
-		}
-		htmlresumetable += "</table>";
-		htmlsmalltable += "</tr></table>";
-		
-		document.getElementById("resumetable").innerHTML = htmlresumetable;
-		document.getElementById("smalltable").innerHTML = htmlsmalltable;
-		
-		if (data.EVENT.METADATA.COUNTDOWN == "00:00:00"){
-			document.getElementById("timeleft").innerHTML = data.EVENT.METADATA.REMAININGTIME;
-		} else {
-			document.getElementById("timeleft").innerHTML = data.EVENT.METADATA.COUNTDOWN;
-		}
-		
-		if (data.EVENT.METADATA.COUNTDOWN == "00:00:30") {
-		$("#resumetable").fadeOut(1000);
-		}
-		
-		if (data.EVENT.METADATA.CURRENTTIME == data.EVENT.METADATA.RACETIME) {
-		$("#resumetable").fadeIn(1000);
-		}
-		
-		if (data.EVENT.METADATA.CURRENTTIME == "00:00:01") {
-		$("#resumetable").hide();
-		}
-		
-		if (data.EVENT.METADATA.COUNTDOWN == "00:00:11") {
-		    var timeleft = 11;
-			var downloadTimer = setInterval(function(){
-			timeleft--;
+
+			// setup, the fx canvas..
+			Application.DemoFxCanvas.setTargetId ('fxCanvas');
+
+			// setup, the resume table canvas..
+			Application.ResumeTableCanvas.setTargetId ('resumeTableDiv');
 			
-			if(timeleft < 1) {
-					if (timeleft == 0) {
-					$("#countdowntimer").fadeIn(250);
-					document.getElementById("countdowntimer").textContent = "Go!";
-					$("#countdowntimer").fadeOut(1000);
-					clearInterval(downloadTimer);
+			// setup, sample data..
+			Application.DemoData.setCallbackFuncion (socketOnMessage);
+
+			// 'socket.onmessage' simulation..
+			function socketOnMessage ()
+			{
+				var json = Application.DemoData.getJson ();
+
+				// draw header and footer..
+				drawHtmlTable (json);
+
+				// draw resume table..
+				// draw particles..
+				// draw countdown..
+				switch (json.EVENT.METADATA.COUNTDOWN)
+				{
+					case "00:00:11":
+						Application.ResumeTableCanvas.setAlpha		(0.0);		// hide resume table
+						break;
+					case "00:00:10":
+						Application.ResumeTableCanvas.setCountDown	("10");		// countdown
+						break;
+					case "00:00:09":
+						Application.ResumeTableCanvas.setCountDown	("9");		// countdown
+						break;
+					case "00:00:08":
+						Application.ResumeTableCanvas.setCountDown	("8");		// countdown
+						break;
+					case "00:00:07":
+						Application.ResumeTableCanvas.setCountDown	("7");		// countdown
+						break;
+					case "00:00:06":
+						Application.ResumeTableCanvas.setCountDown	("6");		// countdown
+						break;
+					case "00:00:05":
+						Application.ResumeTableCanvas.setCountDown	("5");		// countdown
+						break;
+					case "00:00:04":
+						Application.ResumeTableCanvas.setCountDown	("4");		// countdown
+						break;
+					case "00:00:03":
+						Application.ResumeTableCanvas.setCountDown	("3");		// countdown
+						Application.DemoFxCanvas.setAlpha			(0.0);		// hide particles
+						break;
+					case "00:00:02":
+						Application.ResumeTableCanvas.setCountDown	("2");		// countdown
+						break;
+					case "00:00:01":
+						Application.ResumeTableCanvas.setCountDown	("1");		// countdown
+						break;
+					case "00:00:00":
+						Application.ResumeTableCanvas.setCountDown	("");		// all is hidden
+						break;
+					default:
+						Application.ResumeTableCanvas.setCountDown	("");
+						Application.ResumeTableCanvas.setData		(json);
+						Application.ResumeTableCanvas.setAlpha		(1.0);		// show resume table
+						Application.DemoFxCanvas.setAlpha			(1.0);		// show particles
+				}
+			}
+
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			// DEBUG:
+			// click, to simulate COUNTDOWN..
+			
+			var timeleft = 12;
+			function clickHandler (event)
+			{
+				//	"RACETIME":"00:05:00",
+				//	"CURRENTTIME":"00:00:42",
+				//	"REMAININGTIME":"00:04:48",
+				//	"COUNTDOWN":"00:00:00"
+
+				var json = Application.DemoData.getJson ();
+					json.EVENT.METADATA.COUNTDOWN = "00:00:" + (timeleft < 10? "0" + timeleft: timeleft);
+
+					timeleft--;
+					if (timeleft < 0)
+					{
+						timeleft = 12;
 					}
+					
+				socketOnMessage ();
 			}
-			else {
-				$("#countdowntimer").fadeIn(0);
-				document.getElementById("countdowntimer").textContent = timeleft;
-				$("#countdowntimer").fadeOut(1000);
-			}
-			},1000);
-		}	
-	};
-</script>
 
-</body>
+
+
+			/*
+			window.onkeyup = function (event)
+			{
+				var key = event.keyCode ? event.keyCode : event.which;
+
+			//	zog (key);
+
+				// key C :
+				if (key == 67)
+				{
+				}
+				// key SPACE :
+				else if (key == 32)
+				{
+				}
+				// key F :
+				else if (key == 70)
+				{
+				}
+				// key H :
+				else if (key == 72)
+				{
+					// hide FX..
+					Application.DemoFxCanvas.setAlpha		(0.0);
+					Application.ResumeTableCanvas.setAlpha	(0.0);
+				}
+				// key S :
+				else if (key == 83)
+				{
+					// show FX..
+					Application.DemoFxCanvas.setAlpha		(1.0);
+					Application.ResumeTableCanvas.setAlpha	(1.0);
+				}
+			}
+			*/
+
+
+
+		</script>
+
+	</body>
+
 </html>
