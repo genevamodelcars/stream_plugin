@@ -20,19 +20,32 @@ body {
     position: absolute;
     font-weight: 700;
     color: white;
-    background-color: #0E76BD;
-    padding:20px;
+    background-color: rgba(0,0,0,0.8);
+    padding:10px;
+	border-radius : 6px;
+	margin-top: 10px;
+	margin-left: 10px;
 }
 
 .eventname {
-    font-size: 42px;
-    margin-bottom: 10px;
-    font-family: tahoma;
+	height : 39px;
+    font-size: 30px;
+    font-weight: 700;
+	margin-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	background-color: #3AB54A;
+	background-image: url('assets/header_background.png');
+	border-radius : 3px;
+	text-align : center;
+	text-transform: uppercase;
 }
 
 .categoryname {
-    font-size: 22px;
+    font-size: 16px;
 	text-transform: uppercase;
+	font-style : italic;
+	text-align : center;
 }
 
 .live {
@@ -114,7 +127,7 @@ body {
 }
 
 .resume-title {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
 	margin-top: 2px;
 	margin-left: 2px;
