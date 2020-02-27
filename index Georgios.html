@@ -1,63 +1,92 @@
 <!DOCTYPE html>
 <html>
-<head>
+	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-        <title>gemc stream xsplit plugin</title>
-        <link rel="stylesheet" type="text/css" href="style.css" />
-</head>
+		<title>gemc stream xsplit plugin</title>
+		
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		
+		<!-- Libraries -->
+		<script src="libs/xjs.js"></script>
+		<script src="libs/jquery.min.js"></script>
+		<script src="libs/createjs_1.1_min.js"></script>
+		<script src="libs/zim_10.0.1.js"></script>
+		<script src='libs/Vector3.js'></script>
+		
+		<!-- Classes -->
+		<script src='js/ch/gemc/myresults/results/ResumeTable.js'></script>
+		<script src='js/ch/gemc/myresults/results/resumeTableClasses/ColumnConfig.js'></script>
+		<script src='js/ch/gemc/myresults/results/resumeTableClasses/TableCellHeader.js'></script>
+		<script src='js/ch/gemc/myresults/results/resumeTableClasses/TableCell.js'></script>
+		<script src='js/ch/gemc/myresults/results/resumeTableClasses/TableCell.POS.js'></script>
+		<script src='js/ch/gemc/myresults/results/resumeTableClasses/TableCell.DRIVER.js'></script>
+		<script src='js/ch/gemc/myresults/results/resumeTableClasses/TableRowHeader.js'></script>
+		<script src='js/ch/gemc/myresults/results/resumeTableClasses/TableRow.js'></script>
 
-<script src="js/xjs.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<script src="js/ajax.js" type="text/javascript"></script>
-
-<script src="js/readSocketMessage.js"></script>
-
-<body>
-
-<div class='window'>
-	<div class='smalltable'>
-		<div id="smalltable"></div>
-	</div>
-	<div class='resumetable' id='resumetable'>
-	</div>
-	<div class='gemclogo'><div id="timeleft" class="timeleft"> </div><div id="eventname" class="eventname"></div> - <b>geneva</b>modelcars</div>
-	<span id="countdowntimer" class="countdowntimer"></span>
-</div>
-
-<script>
-
-	/*
-	var socket				= new WebSocket ('ws://192.168.1.129:8787');
-		socket.onmessage	= function (event)
-							{
-								readSocketMessage (JSON.parse (event.data));
-							};
-	*/
+		<!-- Modules ?.. -->
+		<script src='js/DemoFxCanvas_module.js'></script>
+		<script src='js/DemoData_module.js'></script>
+		<script src='js/ResumeTableCanvas_module.js'></script>
+		
+	</head>
 	
-	// sample data..
-	var fname = "./Json example/race UTF-16 LE.json";
-	var xhr = createXHR ();
-	xhr.open ("GET", fname, true);
-	xhr.onreadystatechange = function () 
-	{
-		if (xhr.readyState == 4) 
-		{
-			if (xhr.status != 404) 
+	
+	<body>
+		
+		<canvas id='fxCanvas'></canvas>
+		<!--
+		<canvas id='resumeTableCanvas'></canvas>
+		-->
+		<div id='resumeTableDiv'></div>
+		
+		<div class='window' id='windowID'>
+			<div class='smalltable'>
+				<div id='smalltable'></div>
+			</div>
+			<div class='resumetable' id='resumetable'>
+			</div>
+			<div class='gemclogo'>
+				<div id='timeleft' class='timeleft'></div>
+				<div id='eventname' class='eventname'></div>
+			</div>
+			<span id='countdowntimer' class='countdowntimer'></span>
+		</div>
+		
+		<!-- Code -->
+		<script src="js/drawHtmlTable.js"></script>
+		<script>
+
+			/*
+			var socket				= new WebSocket ('ws://192.168.1.129:8787');
+				socket.onmessage	= function (event)
+									{
+										var json = JSON.parse (event.data);
+										drawHtmlTable (json);
+										Application.ResumeTableCanvas.setData (json);
+									};
+			*/
+			
+			// sample data..
+			Application.DemoData.setCallbackFuncion (drawData);
+
+			// start the fx canvas..
+			Application.DemoFxCanvas.setTargetId ('fxCanvas');
+
+			// start the resume table canvas..
+//			Application.ResumeTableCanvas.setTargetId ('resumeTableCanvas');
+//			Application.ResumeTableCanvas.setTargetId ('windowID');
+			Application.ResumeTableCanvas.setTargetId ('resumeTableDiv');
+			
+			function drawData ()
 			{
-				var data = eval ("(" + xhr.responseText + ")");
-				readSocketMessage (data);
-			} 
-			else
-			{
-			//	console.log (" not found !");
+				drawHtmlTable (Application.DemoData.getJson ());
+				Application.ResumeTableCanvas.setData (Application.DemoData.getJson ());
 			}
-		}
-	}
-	xhr.send (null);
+			
+		</script>
 
-</script>
+	</body>
 
-</body>
 </html>

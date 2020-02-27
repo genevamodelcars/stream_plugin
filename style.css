@@ -1,30 +1,64 @@
+
+
+
+#fxCanvas {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	/*
+	z-index: 0;
+	*/
+}
+
+/*
+#resumeTableCanvas {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+}
+*/
+#resumeTableDiv {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+}
+
+
+
 body {
-   margin: 0;
-   background: url("bg.png");
+	margin: 0;
+	background: url("bg.png");
 }
 
 table {
-    width: 100%;
+	width: 100%;
 	border: 0;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 13px;
 }
 
 th {
-    height: 30px;
+	height: 30px;
 	text-transform: uppercase;
 	background-color: #3AB54A;
 }
 
 tr {
-    height: 32px;
+	height: 32px;
     text-align: center;
 }
 
 .window {
+	width:	100%;
+	height: 100%;
+	/*background-color: gray; /* ATTENTION DEV ONLY  */
+	
+	position: absolute;
+	/*
 	width:	1280px;
 	height: 720px;
-	/*background-color: gray; /* ATTENTION DEV ONLY  */
+	z-index: 1;
+	*/
 }
 
 .resumetable {
@@ -45,7 +79,7 @@ tr {
 }
 
 .smalltable {
-	width:	1280px;
+	width:	100%;
 	background:  rgba(0, 0, 0, 0.9);
 	color: white;
 }
@@ -70,27 +104,40 @@ tr {
 }
 
 .gemclogo {
+    width: 100%;
+    height: 64px;
     bottom: 0;
+	position: absolute;
     /* right: 20px; */
+    /* height: 80px; */
+	
+	box-sizing: border-box;
+	padding: 20px;
+
     color: white;
-    position: absolute;
     font-family: Tahoma, Verdana, Segoe, sans-serif;
     font-size: 20px;
     font-style: normal;
-    padding: 20px;
-    width: 1240px;
-    text-align: right;
-    /* height: 80px; */
+	/*
+	text-align: right;
+	*/
     /* margin: 20px; */
     background-color: rgba(0, 0, 0, 0.5);
 }
 	
 .eventname {
+	position: absolute;
+	/*
+	position: relative;
 	display: inline;
+	*/
+	right: 20px;
 }
 
 .timeleft {
+	/*
 	display: inline;
+	*/
     position: absolute;
     left: 20px;
 	font-weight: 600;
@@ -99,15 +146,15 @@ tr {
 .pos {
 	display: inline;
 	background: red;
-  border-radius: 5px;
-  -moz-border-radius: 5x;
-  -webkit-border-radius: 5px;
-  color: white;
-  display: inline-block;
-  margin-right: 3px;
-  text-align: center;
-  width: 1.6em; 
-  padding: 3px;
+	border-radius: 5px;
+	-moz-border-radius: 5x;
+	-webkit-border-radius: 5px;
+	color: white;
+	display: inline-block;
+	margin-right: 3px;
+	text-align: center;
+	width: 1.6em; 
+	padding: 3px;
 }
 
 .countdowntimer {
@@ -119,5 +166,4 @@ tr {
     font-weight: 800;
     font-family: Tahoma, Verdana, Segoe, sans-serif;
 	color: gray;
-}
 }
