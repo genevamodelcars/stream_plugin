@@ -46,25 +46,20 @@ body {
 }
 .eventname {
 	height : 39px;
-	padding-left: 10px;
-	padding-right:10px;
     font-size: 30px;
-    font-weight: 700;
+	font-weight: bold;
 	background-color: #0E76BD;
 	background-image: url('assets/header_background.png');
-	border-radius : 3px;
 	text-transform: uppercase;
+	-webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
-
-
 
 .categoryname {
     font-size: 16px;
 	padding-top:15px;
 	text-transform: uppercase;
-	font-style : italic;
 	list-style:none;
-	text-align:center;
 }
 
 .live {
