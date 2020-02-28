@@ -8,14 +8,18 @@
 
 <script src="js/xjs.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/clock.js"></script>
 
 <body>
     <div class='window'>
         <div class ='event'>
-            <div id="eventname" class="eventname">
-            </div>
-            <div id="categoryname" class="categoryname">
-            </div>
+			<div class="clock">
+				<canvas id="clock" width="80" height="80"/>	
+			</div>
+			<ul class="eventdetails">
+				<li id="eventname" class="eventname"></li>
+                <li id="categoryname" class="categoryname"></li>
+			<ul>
         </div>
         <div class ='live' id ='live'>
 			<div class = 'round-time' id = 'round-time'>
@@ -49,10 +53,22 @@
         </div>
         <div class ='series-logo'>
             <img src="assets/gemcseries.png">
-        </div>
+		</div>
+		<img id="logo" width="200" height="200" src="assets/clock.png" style="visibility:hidden;">
     </div>
     
     <script>
+		/* Clock design */
+		var canvas = document.getElementById("clock");
+		var ctx = canvas.getContext("2d");
+		var radius = canvas.height / 2;
+		ctx.translate(radius, radius);
+		radius = radius *0.95
+		setInterval(drawClock, 1000);
+
+
+
+		/* Data handling */
 		var waittime = 10000; // 10sec
 		var cellsize = 30; //px
 		var maxdrivers = 12;
@@ -66,7 +82,7 @@
 
         document.getElementById("eventname").innerHTML = data.EVENT.METADATA.NAME;
         document.getElementById("categoryname").innerHTML = data.EVENT.METADATA.GROUP.split("::")[1] + " " + data.EVENT.METADATA.GROUP.split("::")[0] +" | " + data.EVENT.METADATA.GROUP.split("::")[2];
-        document.getElementById("round-time").innerHTML = data.EVENT.METADATA.REMAININGTIME;
+        document.getElementById("round-time").innerHTML = data.EVENT.METADATA.REMAININGTIME.substring(3);
 		
         var htmlresumetable = "<div class='resume-title'>" + data.EVENT.METADATA.GROUP.split("::")[1] + " " + data.EVENT.METADATA.GROUP.split("::")[0] +"| " + data.EVENT.METADATA.GROUP.split("::")[2] + "</div><table class='resume-table'><tr><th>Pos</th><th>Driver</th><th>Laps</th><th>Time</th><th>Bestlap</th><th>Average</th></tr>";
         var htmllivetablecell = "";
