@@ -13,12 +13,13 @@
 <body>
     <div class='window'>
         <div class ='event'>
-			<canvas id="clock" width="80" height="80">
-            </canvas>
-            <div id="eventname" class="eventname">
-            </div>
-            <div id="categoryname" class="categoryname">
-            </div>
+			<div class="clock">
+				<canvas id="clock" width="80" height="80"/>	
+			</div>
+			<ul class="eventdetails">
+				<li id="eventname" class="eventname"></li>
+                <li id="categoryname" class="categoryname"></li>
+			<ul>
         </div>
         <div class ='live' id ='live'>
 			<div class = 'round-time' id = 'round-time'>
@@ -57,16 +58,17 @@
     </div>
     
     <script>
-    var canvas = document.getElementById("clock");
-    var ctx = canvas.getContext("2d");
-    var radius = canvas.height / 2;
-    ctx.translate(radius, radius);
-    radius = radius *0.95
-    setInterval(drawClock, 1000);
+		/* Clock design */
+		var canvas = document.getElementById("clock");
+		var ctx = canvas.getContext("2d");
+		var radius = canvas.height / 2;
+		ctx.translate(radius, radius);
+		radius = radius *0.95
+		setInterval(drawClock, 1000);
 
 
 
-
+		/* Data handling */
 		var waittime = 10000; // 10sec
 		var cellsize = 30; //px
 		var maxdrivers = 12;
