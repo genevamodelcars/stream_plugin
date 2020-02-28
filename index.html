@@ -8,10 +8,13 @@
 
 <script src="js/xjs.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/clock.js"></script>
 
 <body>
     <div class='window'>
         <div class ='event'>
+			<canvas id="clock" width="90" height="90">
+            </canvas>
             <div id="eventname" class="eventname">
             </div>
             <div id="categoryname" class="categoryname">
@@ -49,10 +52,21 @@
         </div>
         <div class ='series-logo'>
             <img src="assets/gemcseries.png">
-        </div>
+		</div>
+		<img id="logo" width="200" height="200" src="assets/clock.png" style="visibility:hidden;">
     </div>
     
     <script>
+    var canvas = document.getElementById("clock");
+    var ctx = canvas.getContext("2d");
+    var radius = canvas.height / 2;
+    ctx.translate(radius, radius);
+    radius = radius *0.95
+    setInterval(drawClock, 1000);
+
+
+
+
 		var waittime = 10000; // 10sec
 		var cellsize = 30; //px
 		var maxdrivers = 12;
