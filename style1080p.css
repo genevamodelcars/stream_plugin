@@ -1,0 +1,315 @@
+body {
+   margin: 0;
+}
+
+.hide {
+	visibility: hidden;
+}
+
+.window {
+	/*width:	1280px;
+	height: 720px;*/
+	width:	1920px;
+	height: 1080px;
+	background-color: gray; /* DEV ONLY  */
+    /*background-image: url('assets/background-dev.png'); /* DEV ONLY  */
+    position: absolute;
+    font-family: 'Lato';
+	overflow: hidden;
+	font-size: 24px;
+}
+
+.event {
+    position: absolute;
+    font-weight: 700;
+	color: white;
+	/*height: 80px;*/
+	height: 120px;
+    background-color: rgba(0,0,0,0.8);
+	border-top-right-radius : 6px;
+	border-bottom-right-radius : 6px;
+	/*border-top-left-radius : 50px;
+	border-bottom-left-radius : 50px;
+	margin-top: 10px;
+	margin-left: 10px;
+	padding: 10px;*/
+	border-top-left-radius : 75px;
+	border-bottom-left-radius : 75px;
+	margin-top: 15px;
+	margin-left: 15px;
+	padding: 15px;
+}
+
+.eventdetails {
+	float:left;
+	list-style:none;
+	margin:0px;
+	padding:0px;
+	/*padding-left: 10px;*/
+	padding-left: 15px;
+}
+
+.clock {
+	/*height: 80px;*/
+	height: 120px;
+	float:left;
+}
+.eventname {
+	/*height : 39px;
+    font-size: 30px;*/
+	height : 58px;
+    font-size: 45px;
+	font-weight: bold;
+	background-color: #0E76BD;
+	background-image: url('assets/header_background.png');
+	text-transform: uppercase;
+	-webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.categoryname {
+    /*font-size: 16px;
+	padding-top:15px;*/
+	font-size: 24px;
+	padding-top:20px;
+	text-transform: uppercase;
+	list-style:none;
+}
+
+.live {
+    position: absolute;
+	-webkit-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-ms-transition: 0.5s;
+	-o-transition: 0.5;
+	transition: 0.5s;
+    /*top: 10px;
+    right: 10px;
+    width: 150px;
+	 padding: 10px;*/
+	top: 15px;
+    right: 15px;
+	width: 225px;
+	padding: 15px;
+    color: white;
+    background-color: rgba(0,0,0,0.8);
+	border-radius : 6px;
+}
+
+.live.out {
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	-ms-transition: 1s;
+	-o-transition: 1s;
+	transition: 1s;
+	/*right: -300px !important;*/
+	right: -200px !important;
+}
+
+.round-time {
+    text-align: center;
+    /*font-size: 32px;*/
+	font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 10px;
+	background-color: #0E76BD;
+	background-image: url('assets/header_background.png');
+	border-radius : 3px;
+}
+
+.live-table {
+  width: 100%; 
+}
+
+.live-table-cell {
+	position: absolute;
+	-webkit-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-ms-transition: 0.5s;
+	-o-transition: 0.5s;
+	transition: 0.5s;
+	right: 10px;
+    /*width: 150px;*/
+	width: 225px;
+}
+
+.resume {
+    position: absolute;
+	-webkit-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-ms-transition: 0.5s;
+	-o-transition: 0.5;
+	transition: 0.5s;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto;
+    /*margin-top: 200px;
+    width: 600px;
+	   padding: 10px;*/
+	margin-top: 300px;
+	width: 900px;
+	padding: 15px;
+    color: white;
+    background-color: rgba(0,0,0,0.8);
+	border-radius : 6px;
+}
+
+.resume.out {
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	-ms-transition: 1s;
+	-o-transition: 1s;
+	transition: 1s;
+	/*left: -3000px !important;*/
+	left: -2000px !important;
+}
+
+.resume-title {
+    /*font-size: 20px;
+	padding: 10px;*/
+	font-size: 30px;
+	padding: 15px;
+    font-weight: 700;
+	margin-top: 2px;
+	margin-left: 2px;
+	margin-right: 2px;
+    margin-bottom: 10px;
+	text-transform: uppercase;
+	text-align: center;
+	background-color: #0E76BD;
+	background-image: url('assets/header_background.png');
+	border-radius : 3px;
+}
+
+.resume-table {
+    width: 100%;
+}
+
+.resume-table th {
+    text-align: left    ;
+}
+
+.inactive {
+    color: grey;
+}
+
+.next {
+	position: absolute;
+	-webkit-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-ms-transition: 0.5s;
+	-o-transition: 0.5;
+	transition: 0.5s;
+    bottom: 10px;
+    left: 10px;
+    /*font-size: 18px;
+	padding: 7px;*/
+	font-size: 30px;
+	padding: 10px;
+    font-weight: 500;
+	font-style: italic;
+    color: white;
+    background-color: rgba(0,0,0,0.8);
+	border-radius : 6px;
+}
+
+.next.out {
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	-ms-transition: 1s;
+	-o-transition: 1s;
+	transition: 1s;
+	/*left: -700px !important;*/
+	left: -1050px !important;
+}
+
+.series-logo {
+    position: absolute;
+    /*bottom: 20px;
+    right: 20px;
+    height: 100px;*/
+	bottom: 30px;
+    right: 30px;
+	height: 150px;
+}
+
+.series-logo img {
+    height: 100%;
+}
+
+.driver-color { 
+    /*height: 25px;
+    width: 25px;*/
+	height: 37px;
+    width: 37px;
+    border-radius: 0%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    margin-right: 10px;
+    /*font-size: 18px;*/
+	font-size: 30px;
+    font-weight: 700;
+    color: black;
+    background-color:white;
+	border-radius : 3px;
+}
+
+.driver-name {
+	margin-right: 10px;
+	height: 100%;
+    vertical-align: middle;
+}
+
+.driver-delta {
+	height: 100%;
+    vertical-align: middle;
+	float:right;
+}
+
+.color-0 {  
+	/* Not used */
+}
+
+.color-1 {
+	/* Normal state */
+}
+
+.color-2 {
+	/* Locktime */
+}
+
+.color-3 {
+	/* Not used */
+}
+
+.color-4 {
+	/* Round finish */
+    background-color: aqua;
+}
+
+.color-5 {
+	/* Miss */
+	background-color: grey;
+}
+
+.color-6 {
+	/* Warmup */
+	background-color: yellow;
+}
+
+.color-7 {
+	/* Offtime */
+}
+
+.color-8 {
+	/* Lost */
+	background-color: grey;
+	
+}
+
+.color-9 {
+	/* Lastlap */
+	background-color: red;
+}

@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>gemc stream xsplit plugin 2020</title>
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="style1080p.css" />
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 </head>
 
@@ -14,7 +14,8 @@
     <div class='window'>
         <div class ='event'>
 			<div class="clock">
-				<canvas id="clock" width="80" height="80"/>	
+				<! <canvas id="clock" width="80" height="80"/>	
+				<canvas id="clock" width="120" height="120"/>
 			</div>
 			<ul class="eventdetails">
 				<li id="eventname" class="eventname"></li>
@@ -54,7 +55,8 @@
         <div class ='series-logo'>
             <img src="assets/gemcseries.png">
 		</div>
-		<img id="logo" width="200" height="200" src="assets/clock.png" style="visibility:hidden;">
+		<!<img id="logo" width="200" height="200" src="assets/clock.png" style="visibility:hidden;">
+		<img id="logo" width="300" height="300" src="assets/clock.png" style="visibility:hidden;">
     </div>
     
     <script>
@@ -70,11 +72,12 @@
 
 		/* Data handling */
 		var waittime = 10000; // 10sec
-		var cellsize = 30; //px
+		//var cellsize = 30; //px
+		var cellsize = 45; //px
 		var maxdrivers = 12;
 		var endtime = 9582744014867;
 		
-		//var socket = new WebSocket('ws://192.168.1.108:8787');
+		//var socket = new WebSocket('ws://192.168.254.50:8787');
         //socket.onmessage=function(event) {
         //var data = JSON.parse(event.data);
 		
@@ -134,9 +137,11 @@
 				document.getElementById(data.EVENT.DATA[i].VEHICLE).innerHTML = htmllivetablecell;
 				document.getElementById(data.EVENT.DATA[i].VEHICLE).removeAttribute('class');
 				document.getElementById(data.EVENT.DATA[i].VEHICLE).classList.add('live-table-cell');			
-				document.getElementById(data.EVENT.DATA[i].VEHICLE).style.top = (i*cellsize + 60) + "px";
+				//document.getElementById(data.EVENT.DATA[i].VEHICLE).style.top = (i*cellsize + 60) + "px";
+				document.getElementById(data.EVENT.DATA[i].VEHICLE).style.top = (i*cellsize + 90) + "px";
 				}
-				document.getElementById("live").style.height = 80 + i * cellsize + "px";
+				//document.getElementById("live").style.height = 80 + i * cellsize + "px";
+				document.getElementById("live").style.height = 120 + i * cellsize + "px";
 			}			
         }
         
