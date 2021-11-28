@@ -69,7 +69,7 @@ function drawTime(ctx, radius){
 
 function drawHand(ctx, pos, length, width) {
     ctx.beginPath();
-	ctx.strokeStyle="#0E76BD";
+	ctx.strokeStyle="#70C2CE";
     ctx.lineWidth = width;
     ctx.lineCap = "round";
     ctx.moveTo(0,0);

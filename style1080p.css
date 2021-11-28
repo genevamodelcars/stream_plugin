@@ -60,7 +60,7 @@ body {
 	height : 58px;
     font-size: 45px;
 	font-weight: bold;
-	background-color: #0E76BD;
+	background-color: #70C2CE;
 	background-image: url('assets/header_background.png');
 	text-transform: uppercase;
 	-webkit-background-clip: text;
@@ -112,7 +112,7 @@ body {
 	font-size: 48px;
     font-weight: 700;
     margin-bottom: 10px;
-	background-color: #0E76BD;
+	background-color: #70C2CE;
 	background-image: url('assets/header_background.png');
 	border-radius : 3px;
 }
@@ -177,7 +177,7 @@ body {
     margin-bottom: 10px;
 	text-transform: uppercase;
 	text-align: center;
-	background-color: #0E76BD;
+	background-color: #70C2CE;
 	background-image: url('assets/header_background.png');
 	border-radius : 3px;
 }
